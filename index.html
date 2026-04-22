@@ -424,36 +424,46 @@
       background: #ffffff !important;
       color: #1a1d2e !important;
       display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
 
-    /* ── Slide area: visible stack ── */
+/* ── Slide area: visible stack ── */
     .slide-area {
       overflow: visible !important;
       height: auto !important;
-      position: static !important;
+      position: relative !important;
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
     }
 
     /* ── Every slide = one A4 landscape page, white ── */
-    .slide {
+    .slide, .slide.active {
       display: flex !important;
       position: relative !important;
+      visibility: visible !important;
+      opacity: 1 !important;
       width: 100% !important;
       height: 168mm !important;
       min-height: 168mm !important;
       max-height: 168mm !important;
       overflow: hidden !important;
-      page-break-after: always !important;
+      break-before: page !important;
       break-after: page !important;
+      page-break-before: always !important;
+      page-break-after: always !important;
       padding: 20px 34px !important;
       box-sizing: border-box !important;
-      /* WHITE background — override ALL dark backgrounds */
       background: #ffffff !important;
       color: #1a1d2e !important;
     }
 
     .slide:last-child {
-      page-break-after: avoid !important;
-      break-after: avoid !important;
+      break-before: auto !important;
+      page-break-before: auto !important;
+      break-after: auto !important;
+      page-break-after: auto !important;
     }
 
     /* ── Cover slides: light tinted backgrounds ── */
