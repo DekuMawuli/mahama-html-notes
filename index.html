@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HTML for Beginners – 3-Day Course</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-
 <style>
   /* ── DARK MODE (default) ── */
   :root {
@@ -400,117 +399,229 @@
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
   /* ══════════════════════════════
-     PRINT STYLES
+     PRINT STYLES  — clean white theme
      ══════════════════════════════ */
   @media print {
     @page {
       size: A4 landscape;
-      margin: 12mm 14mm;
+      margin: 10mm 14mm;
     }
 
-    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    /* ── Force white background on everything ── */
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
 
+    /* ── Page chrome: hidden ── */
+    .topbar, .progress-bar-wrap, .bottom-nav { display: none !important; }
+
+    /* ── Body resets to white ── */
     body {
       height: auto !important;
       overflow: visible !important;
-      background: #0b0d14 !important;
+      background: #ffffff !important;
+      color: #1a1d2e !important;
       display: block !important;
     }
 
-    /* Hide interactive chrome */
-    .topbar, .progress-bar-wrap, .bottom-nav { display: none !important; }
-
-    /* Show ALL slides as stacked pages */
+    /* ── Slide area: visible stack ── */
     .slide-area {
       overflow: visible !important;
       height: auto !important;
       position: static !important;
     }
 
+    /* ── Every slide = one A4 landscape page, white ── */
     .slide {
       display: flex !important;
       position: relative !important;
       width: 100% !important;
-      height: 170mm !important;
-      min-height: 170mm !important;
-      max-height: 170mm !important;
+      height: 168mm !important;
+      min-height: 168mm !important;
+      max-height: 168mm !important;
       overflow: hidden !important;
       page-break-after: always !important;
       break-after: page !important;
-      padding: 22px 36px !important;
+      padding: 20px 34px !important;
       box-sizing: border-box !important;
-      background: #0b0d14 !important;
+      /* WHITE background — override ALL dark backgrounds */
+      background: #ffffff !important;
+      color: #1a1d2e !important;
     }
 
-    .slide:last-child { page-break-after: avoid !important; break-after: avoid !important; }
+    .slide:last-child {
+      page-break-after: avoid !important;
+      break-after: avoid !important;
+    }
 
-    /* Slide cover: dark radial keeps printing */
+    /* ── Cover slides: light tinted backgrounds ── */
     .slide-cover {
-      background: radial-gradient(ellipse at 70% 40%, #1a2e1a 0%, #0b0d14 60%) !important;
+      background: linear-gradient(135deg, #e8f8f0 0%, #f0f4ff 100%) !important;
     }
     .day-cover {
-      background: radial-gradient(ellipse at 60% 50%, #131a2e 0%, #0b0d14 70%) !important;
+      background: linear-gradient(135deg, #e8f0ff 0%, #f4f0ff 100%) !important;
+    }
+    #slide-30 {
+      background: linear-gradient(135deg, #f0ebff 0%, #ffe8f5 100%) !important;
+    }
+    #slide-29 {
+      background: linear-gradient(135deg, #e8f0ff 0%, #f0ebff 100%) !important;
     }
 
-    /* Scale down fonts slightly for print */
-    .slide-cover h1 { font-size: 2rem !important; }
-    .day-cover h2 { font-size: 1.8rem !important; }
-    .slide-content h2 { font-size: 1.4rem !important; }
-    .subtitle { font-size: 0.78rem !important; margin-bottom: 14px !important; }
-    .divider { margin-bottom: 14px !important; }
+    /* ── All text: dark on white ── */
+    .slide, .slide * {
+      color: #1a1d2e !important;
+    }
 
-    /* Tighten spacing */
-    .two-col { gap: 16px !important; }
-    .three-col { gap: 10px !important; }
-    .steps { gap: 7px !important; }
-    .agenda-grid { gap: 8px !important; }
+    /* ── Accent text colours preserved ── */
+    .hl, .slide-cover h1 span, .logo { color: #0a7a50 !important; }
+    .hl2 { color: #1564c0 !important; }
+    .hl3 { color: #b5104f !important; }
+    .eyebrow, .day-badge.d1 { color: #0a7a50 !important; }
+    .day-badge.d2 { color: #1564c0 !important; }
+    .day-badge.d3 { color: #b5104f !important; }
+    .muted, .subtitle, .hint { color: #555e80 !important; }
 
-    .card { padding: 12px 14px !important; }
-    .card p, .card li { font-size: 0.75rem !important; }
-    .card h4 { font-size: 0.8rem !important; }
+    /* ── Cards: white with light border ── */
+    .card {
+      background: #f4f6fb !important;
+      border: 1px solid #cdd3e8 !important;
+      padding: 10px 12px !important;
+    }
+    .card h4 { color: #1a1d2e !important; font-size: 0.8rem !important; }
+    .card p, .card li { color: #444 !important; font-size: 0.74rem !important; }
 
-    .step { padding: 9px 12px !important; }
-    .step-body h5 { font-size: 0.8rem !important; }
-    .step-body p { font-size: 0.72rem !important; }
+    /* ── Steps: light backgrounds ── */
+    .step {
+      background: #f4f6fb !important;
+      border: 1px solid #cdd3e8 !important;
+      padding: 8px 12px !important;
+    }
+    .step-body h5 { color: #1a1d2e !important; font-size: 0.8rem !important; }
+    .step-body p  { color: #555e80 !important; font-size: 0.72rem !important; }
+    .step-num.g { background: #d0f0e0 !important; color: #0a7a50 !important; }
+    .step-num.b { background: #d0e4f8 !important; color: #1564c0 !important; }
+    .step-num.p { background: #f8d0e0 !important; color: #b5104f !important; }
+    .step-num.y { background: #f8ecc0 !important; color: #9a6c00 !important; }
 
-    .hbox { padding: 10px 14px !important; font-size: 0.76rem !important; margin-top: 10px !important; }
+    /* ── Highlight boxes: pastel on white ── */
+    .hbox {
+      padding: 8px 12px !important;
+      font-size: 0.74rem !important;
+      margin-top: 8px !important;
+    }
+    .hbox-green  { background: #d8f5e8 !important; border-left: 3px solid #0a7a50 !important; color: #1a1d2e !important; }
+    .hbox-blue   { background: #d4e8f8 !important; border-left: 3px solid #1564c0 !important; color: #1a1d2e !important; }
+    .hbox-pink   { background: #f8d4e4 !important; border-left: 3px solid #b5104f !important; color: #1a1d2e !important; }
+    .hbox-yellow { background: #f8ecc0 !important; border-left: 3px solid #9a6c00 !important; color: #1a1d2e !important; }
 
-    .code-block pre { padding: 10px 14px !important; font-size: 0.7rem !important; line-height: 1.6 !important; }
-    .code-header { padding: 6px 12px !important; }
-    .code-filename { font-size: 0.6rem !important; }
+    /* ── Code blocks: keep dark (readable contrast) ── */
+    .code-block {
+      background: #1e2235 !important;
+      border: 1px solid #3a4060 !important;
+      border-radius: 8px !important;
+    }
+    .code-header {
+      background: #161929 !important;
+      border-bottom: 1px solid #3a4060 !important;
+      padding: 5px 12px !important;
+    }
+    .code-filename { color: #8899bb !important; font-size: 0.6rem !important; }
+    .code-block pre {
+      padding: 8px 12px !important;
+      font-size: 0.7rem !important;
+      line-height: 1.6 !important;
+    }
+    /* Syntax colours stay as-is on dark code bg */
+    .t   { color: #e8eaf6 !important; }
+    .tag { color: #5ea6f0 !important; }
+    .attr{ color: #f0c85e !important; }
+    .val { color: #5ef0a0 !important; }
+    .cm  { color: #6a7a9a !important; }
+    .str { color: #f07090 !important; }
+    .ent { color: #c07aee !important; }
 
-    table { font-size: 0.72rem !important; }
-    th { padding: 7px 10px !important; font-size: 0.62rem !important; }
-    td { padding: 6px 10px !important; }
+    /* ── Tables: white with borders ── */
+    .tbl-wrap {
+      background: #ffffff !important;
+      border: 1px solid #cdd3e8 !important;
+    }
+    thead tr { background: #e8ecf8 !important; }
+    th { color: #555e80 !important; padding: 6px 10px !important; font-size: 0.62rem !important; border-bottom: 1px solid #cdd3e8 !important; }
+    td { color: #1a1d2e !important; padding: 5px 10px !important; border-bottom: 1px solid #e4e8f4 !important; font-size: 0.72rem !important; }
+    td code {
+      background: #e4e8f8 !important;
+      color: #1564c0 !important;
+      border: 1px solid #b8c8e8 !important;
+      font-size: 0.7rem !important;
+    }
 
-    .preview-box { padding: 10px 14px !important; font-size: 0.8rem !important; }
-    .preview-label { font-size: 0.58rem !important; }
+    /* ── Agenda items ── */
+    .agenda-item {
+      background: #f0f4fb !important;
+      border: 1px solid #cdd3e8 !important;
+      padding: 8px 10px !important;
+    }
+    .agenda-item .num   { color: #8890aa !important; font-size: 0.62rem !important; }
+    .agenda-item .topic { color: #1a1d2e !important; font-size: 0.8rem !important; }
 
-    .tag-anatomy { padding: 12px 18px !important; font-size: 0.85rem !important; }
-    .anat-part small { font-size: 0.52rem !important; }
+    /* ── Pills & badges ── */
+    .pill { font-size: 0.66rem !important; padding: 3px 10px !important; }
+    .pill-green  { background: #d0f0e0 !important; color: #0a7a50 !important; border-color: #0a7a50 !important; }
+    .pill-blue   { background: #d0e4f8 !important; color: #1564c0 !important; border-color: #1564c0 !important; }
+    .pill-pink   { background: #f8d0e0 !important; color: #b5104f !important; border-color: #b5104f !important; }
+    .pill-yellow { background: #f8ecc0 !important; color: #9a6c00 !important; border-color: #9a6c00 !important; }
+    .pill-row { margin-bottom: 14px !important; }
 
-    .agenda-item { padding: 10px 12px !important; }
-    .agenda-item .topic { font-size: 0.8rem !important; }
-    .agenda-item .num { font-size: 0.62rem !important; }
+    .day-badge { font-size: 0.62rem !important; margin-bottom: 12px !important; }
+    .day-badge.d1 { background: #d0f0e0 !important; border-color: #0a7a50 !important; }
+    .day-badge.d2 { background: #d0e4f8 !important; border-color: #1564c0 !important; }
+    .day-badge.d3 { background: #f8d0e0 !important; border-color: #b5104f !important; }
 
-    .pill { padding: 4px 12px !important; font-size: 0.68rem !important; }
-    .pill-row { margin-bottom: 16px !important; }
+    /* ── Tag anatomy ── */
+    .tag-anatomy {
+      background: #f0f4fb !important;
+      border: 1px solid #cdd3e8 !important;
+      padding: 12px 16px !important;
+      font-size: 0.85rem !important;
+    }
+    .anat-open         { background: #d4e8f8 !important; color: #1564c0 !important; border-color: #a0c4f0 !important; }
+    .anat-tag          { background: #d0f0e0 !important; color: #0a7a50 !important; border-color: #8dd4b0 !important; }
+    .anat-close-slash  { background: #f8d4e4 !important; color: #b5104f !important; border-color: #f0a0c0 !important; }
+    .anat-content      { background: #f8ecc0 !important; color: #9a6c00 !important; border-color: #e8c860 !important; }
+    .anat-part small   { color: #6b7599 !important; font-size: 0.52rem !important; }
 
-    .slide-cover p { font-size: 0.9rem !important; margin-bottom: 16px !important; }
-    .day-cover p { font-size: 0.85rem !important; margin-bottom: 16px !important; }
+    /* ── Preview boxes ── */
+    .preview-box   { background: #fff !important; color: #222 !important; border: 1px solid #ddd !important; padding: 10px 14px !important; font-size: 0.8rem !important; }
+    .preview-label { color: #8890aa !important; font-size: 0.58rem !important; }
 
-    .eyebrow { font-size: 0.65rem !important; margin-bottom: 12px !important; }
-    .day-badge { font-size: 0.62rem !important; margin-bottom: 14px !important; }
+    /* ── Divider ── */
+    .divider { background: #cdd3e8 !important; margin-bottom: 12px !important; }
 
-    /* Slide number watermark */
+    /* ── Spacing ── */
+    .slide-cover h1    { font-size: 2rem !important; color: #1a1d2e !important; }
+    .day-cover h2      { font-size: 1.8rem !important; color: #1a1d2e !important; }
+    .slide-content h2  { font-size: 1.4rem !important; color: #1a1d2e !important; }
+    .subtitle          { font-size: 0.76rem !important; margin-bottom: 12px !important; color: #555e80 !important; }
+    .slide-cover p     { font-size: 0.88rem !important; color: #444 !important; margin-bottom: 14px !important; }
+    .day-cover p       { font-size: 0.84rem !important; color: #444 !important; margin-bottom: 14px !important; }
+    .eyebrow           { font-size: 0.64rem !important; margin-bottom: 10px !important; }
+    .two-col           { gap: 14px !important; }
+    .three-col         { gap: 10px !important; }
+    .steps             { gap: 6px !important; }
+    .agenda-grid       { gap: 8px !important; }
+
+    /* ── Slide number watermark ── */
     .slide::after {
       content: attr(data-slide-num);
       position: absolute;
-      bottom: 8px;
-      right: 14px;
+      bottom: 6px;
+      right: 12px;
       font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      color: #3a3f60;
+      font-size: 0.58rem;
+      color: #aab0cc;
     }
   }
 
@@ -2424,7 +2535,7 @@ css2?family=Roboto"</span>
   }
 
   /* ── FONT SIZE ── */
-  const fontSteps = [0.8, 0.9, 1, 1.1, 1.2, 1.35, 1.5];
+  const fontSteps = [0.8, 0.9, 1, 1.1, 1.2, 1.35, 1.5, 1.65, 1.8, 2.0, 2.2, 2.5, 2.75, 3.0];
   let fontIdx = 2; // default = 1 (100%)
   function changeFont(dir) {
     fontIdx = Math.max(0, Math.min(fontSteps.length - 1, fontIdx + dir));
