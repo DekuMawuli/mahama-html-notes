@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML for Beginners – 3-Day Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── DARK MODE (default) ── */
+  :root {
+    --bg: #0b0d14;
+    --surface: #13151f;
+    --card: #1a1d2e;
+    --border: #252840;
+    --accent: #5ef0a0;
+    --accent2: #5ea6f0;
+    --accent3: #f05e9a;
+    --accent4: #f0c85e;
+    --text: #e8eaf6;
+    --muted: #7b82a8;
+    --code-bg: #0d0f1a;
+    --code-header-bg: #10121c;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  /* ── LIGHT MODE ── */
+  :root.light {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --card: #eef1f8;
+    --border: #cdd3e8;
+    --accent: #0c8f56;
+    --accent2: #1564c0;
+    --accent3: #b5104f;
+    --accent4: #9a6c00;
+    --text: #1a1d2e;
+    --muted: #555e80;
+    --code-bg: #1e2235;
+    --code-header-bg: #161929;
+    --table-head-bg: #e2e8f4;
+    --table-head-text: #555e80;
+    --chip-bg: #dde4f2;
+    --chip-text: #1a1d2e;
+    --anatomy-bg: #e8ecf8;
+    --anatomy-border: #cdd3e8;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  :root {
+    --table-head-bg: var(--code-bg);
+    --table-head-text: var(--muted);
+    --chip-bg: var(--code-bg);
+    --chip-text: var(--accent2);
+    --anatomy-bg: var(--code-bg);
+    --anatomy-border: var(--border);
+  }
+
+  /* ── FONT SIZE SCALE ── */
+  :root { --fs: 1; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 28px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    gap: 12px;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 14px; }
+  .logo {
+    font-size: 1rem; font-weight: 800; letter-spacing: -0.5px;
+    color: var(--accent);
+  }
+  .day-tabs { display: flex; gap: 6px; }
+  .day-tab {
+    padding: 5px 14px; border-radius: 20px; font-size: 0.72rem;
+    font-weight: 700; cursor: pointer; border: 1.5px solid var(--border);
+    background: transparent; color: var(--muted); transition: all 0.2s;
+    font-family: var(--font-display);
+  }
+  .day-tab.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .day-tab.css-tab.active { background: #a78bfa; color: #1a1d2e; border-color: #a78bfa; }
+  .day-tab.css-tab:hover:not(.active) { border-color: #a78bfa; color: #a78bfa; }
+  .day-tab:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  #slide-counter { font-size: 0.75rem; color: var(--muted); font-family: var(--font-mono); }
+  /* ── FONT SIZE CONTROLS ── */
+  .font-ctrl {
+    display: flex; align-items: center; gap: 4px;
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 8px; padding: 3px 6px;
+  }
+  .font-btn {
+    background: transparent; border: none; color: var(--text);
+    cursor: pointer; font-size: 0.72rem; font-weight: 700;
+    font-family: var(--font-display); padding: 2px 5px; border-radius: 4px;
+    transition: all 0.15s;
+  }
+  .font-btn:hover { background: var(--border); color: var(--accent); }
+  .font-label { font-size: 0.65rem; color: var(--muted); font-family: var(--font-mono); min-width: 30px; text-align: center; }
+
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid var(--border);
+    background: var(--card); cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent2); transform: scale(1.08); }
+
+  /* ── LIGHT MODE OVERRIDES ── */
+  :root.light .slide-cover {
+    background: radial-gradient(ellipse at 70% 40%, #d4f0e4 0%, var(--bg) 60%) !important;
+  }
+  :root.light .day-cover {
+    background: radial-gradient(ellipse at 60% 50%, #dde8f7 0%, var(--bg) 70%) !important;
+  }
+  :root.light #slide-30 {
+    background: radial-gradient(ellipse at 60% 50%, #ede8fc 0%, var(--bg) 70%) !important;
+  }
+  :root.light #slide-29 {
+    background: radial-gradient(ellipse at 70% 40%, #e6dcf7 0%, var(--bg) 60%) !important;
+  }
+  :root.light .code-block pre .t { color: #e8eaf6; }
+  :root.light .anat-open { background: #dceeff; color: #1564c0; border-color: #a0c4f0; }
+  :root.light .anat-tag  { background: #d4f4e4; color: #0c8f56; border-color: #8dd4b0; }
+  :root.light .anat-close-slash { background: #fde0ec; color: #b5104f; border-color: #f0a0c0; }
+  :root.light .anat-content { background: #fdf2d0; color: #9a6c00; border-color: #e8c860; }
+  :root.light .anat-part small { color: #6b7599; }
+  :root.light td code { background: #dde4f2; color: #1564c0; border-color: #b8c8e8; }
+  /* hboxes */
+  :root.light .hbox-green { background: #d6f5e8; color: var(--text); }
+  :root.light .hbox-blue  { background: #d6e8fa; color: var(--text); }
+  :root.light .hbox-pink  { background: #fcd8e8; color: var(--text); }
+  :root.light .hbox-yellow{ background: #faeec8; color: var(--text); }
+  /* step nums */
+  :root.light .step-num.g { background: #c8edd8; color: #0c8f56; }
+  :root.light .step-num.b { background: #c8ddf5; color: #1564c0; }
+  :root.light .step-num.p { background: #f5cedd; color: #b5104f; }
+  :root.light .step-num.y { background: #f5e8b8; color: #9a6c00; }
+  /* pills */
+  :root.light .pill-green { background: #d4f4e4; }
+  :root.light .pill-blue  { background: #d4e4f8; }
+  :root.light .pill-pink  { background: #fad4e4; }
+  :root.light .pill-yellow{ background: #f8ecc8; }
+  /* day badges */
+  :root.light .day-badge.d1 { background: #c8edd8; }
+  :root.light .day-badge.d2 { background: #c8ddf5; }
+  :root.light .day-badge.d3 { background: #f5cedd; }
+  /* kbd */
+  :root.light kbd { background: #e4e8f4; color: #1564c0; border-color: #b8c8e4; }
+  /* font ctrl */
+  :root.light .font-ctrl { background: #e8ecf6; }
+  :root.light .font-btn { color: var(--text); }
+  :root.light .theme-toggle { background: #e8ecf6; }
+  :root.light .topbar { box-shadow: 0 1px 8px rgba(0,0,0,0.08); }
+  :root.light .bottom-nav { box-shadow: 0 -1px 8px rgba(0,0,0,0.06); }
+  :root.light .card { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+
+  .print-btn {
+    padding: 5px 14px; border-radius: 8px; border: 1.5px solid var(--accent4);
+    background: rgba(240,200,94,0.08); color: var(--accent4); cursor: pointer;
+    font-size: 0.72rem; font-weight: 700; font-family: var(--font-display);
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .print-btn:hover { background: rgba(240,200,94,0.18); }
+  .nav-btn {
+    width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid var(--border);
+    background: transparent; color: var(--text); cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap { height: 3px; background: var(--border); flex-shrink: 0; }
+  .progress-bar { height: 100%; background: var(--accent); transition: width 0.4s ease; }
+
+  /* ── SLIDE AREA ── */
+  .slide-area {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .slide {
+    position: absolute; inset: 0;
+    padding: 40px 60px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 0.35s ease;
+    overflow-y: auto;
+  }
+  .slide.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SLIDE LAYOUTS ── */
+  .slide-cover {
+    align-items: flex-start;
+    background: radial-gradient(ellipse at 70% 40%, #1a2e1a 0%, var(--bg) 60%);
+  }
+  .slide-cover .eyebrow {
+    font-size: calc(0.82rem * var(--fs)); font-weight: 700; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 18px;
+    font-family: var(--font-mono);
+  }
+  .slide-cover h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; line-height: 1.1;
+    margin-bottom: 20px; max-width: 700px;
+  }
+  .slide-cover h1 span { color: var(--accent); }
+  .slide-cover p { font-size: calc(1.1rem * var(--fs)); color: var(--muted); max-width: 540px; line-height: 1.7; margin-bottom: 28px; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+  .pill {
+    padding: 6px 16px; border-radius: 20px; font-size: calc(0.82rem * var(--fs)); font-weight: 700;
+    font-family: var(--font-mono); border: 1.5px solid;
+  }
+  .pill-green { color: var(--accent); border-color: var(--accent); background: rgba(94,240,160,0.07); }
+  .pill-blue { color: var(--accent2); border-color: var(--accent2); background: rgba(94,166,240,0.07); }
+  .pill-pink { color: var(--accent3); border-color: var(--accent3); background: rgba(240,94,154,0.07); }
+  .pill-yellow { color: var(--accent4); border-color: var(--accent4); background: rgba(240,200,94,0.07); }
+
+  /* ── DAY COVER ── */
+  .day-cover {
+    background: radial-gradient(ellipse at 60% 50%, #131a2e 0%, var(--bg) 70%);
+    align-items: flex-start;
+  }
+  .day-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: calc(0.75rem * var(--fs)); font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; font-family: var(--font-mono);
+    padding: 6px 14px; border-radius: 4px; margin-bottom: 22px;
+    border: 1px solid;
+  }
+  .day-badge.d1 { color: var(--accent); border-color: var(--accent); background: rgba(94,240,160,0.08); }
+  .day-badge.d2 { color: var(--accent2); border-color: var(--accent2); background: rgba(94,166,240,0.08); }
+  .day-badge.d3 { color: var(--accent3); border-color: var(--accent3); background: rgba(240,94,154,0.08); }
+
+  .day-cover h2 { font-size: clamp(calc(1.9rem * var(--fs)), 4vw, calc(3.2rem * var(--fs))); font-weight: 800; margin-bottom: 14px; line-height: 1.1; }
+  .day-cover p { font-size: calc(1rem * var(--fs)); color: var(--muted); max-width: 600px; line-height: 1.7; margin-bottom: 28px; }
+
+  .agenda-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; width: 100%;
+  }
+  .agenda-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .agenda-item .num { font-family: var(--font-mono); font-size: calc(0.75rem * var(--fs)); color: var(--muted); margin-bottom: 6px; }
+  .agenda-item .topic { font-size: calc(0.95rem * var(--fs)); font-weight: 700; }
+
+  /* ── CONTENT SLIDE ── */
+  .slide-content { justify-content: flex-start; padding-top: 48px; }
+  .slide-content h2 {
+    font-size: clamp(calc(1.6rem * var(--fs)), 3vw, calc(2.4rem * var(--fs))); font-weight: 800; margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .slide-content h2 .hl { color: var(--accent); }
+  .slide-content h2 .hl2 { color: var(--accent2); }
+  .slide-content h2 .hl3 { color: var(--accent3); }
+  .subtitle { font-size: calc(1rem * var(--fs)); color: var(--muted); margin-bottom: 28px; }
+  .divider { height: 2px; background: var(--border); margin-bottom: 28px; border-radius: 2px; }
+
+  /* ── TWO-COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; font-family: var(--font-mono);
+  }
+  .code-header {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 14px; background: var(--code-header-bg, #10121c); border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28ca41; }
+  .code-filename { font-size: calc(0.65rem * var(--fs)); color: var(--muted); margin-left: 6px; }
+  .code-block pre {
+    padding: 16px 18px; font-size: calc(0.88rem * var(--fs)); line-height: 1.75;
+    overflow-x: auto; white-space: pre;
+  }
+  .t { color: #e8eaf6; }
+  .tag { color: #5ea6f0; }
+  .attr { color: #f0c85e; }
+  .val { color: #5ef0a0; }
+  .cm { color: #6a7590; }
+  .str { color: #f05e9a; }
+  .ent { color: #b45ef0; }
+
+  /* ── INFO CARDS ── */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .card h4 { font-size: calc(0.95rem * var(--fs)); font-weight: 700; margin-bottom: 8px; }
+  .card p, .card li { font-size: calc(0.9rem * var(--fs)); color: var(--muted); line-height: 1.7; }
+  .card ul { padding-left: 16px; }
+  .card .icon { font-size: calc(1.4rem * var(--fs)); margin-bottom: 10px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .hbox {
+    border-radius: 10px; padding: 14px 18px;
+    font-size: calc(0.92rem * var(--fs)); line-height: 1.65; margin-top: 16px;
+  }
+  .hbox-green { background: rgba(94,240,160,0.08); border-left: 3px solid var(--accent); color: var(--text); }
+  .hbox-blue { background: rgba(94,166,240,0.08); border-left: 3px solid var(--accent2); color: var(--text); }
+  .hbox-pink { background: rgba(240,94,154,0.08); border-left: 3px solid var(--accent3); color: var(--text); }
+  .hbox-yellow { background: rgba(240,200,94,0.08); border-left: 3px solid var(--accent4); color: var(--text); }
+  .hbox strong { font-weight: 700; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: calc(0.9rem * var(--fs)); }
+  thead tr { background: var(--table-head-bg); }
+  th { padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-size: calc(0.78rem * var(--fs)); color: var(--table-head-text); border-bottom: 1px solid var(--border); }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+  td code { font-family: var(--font-mono); font-size: calc(0.86rem * var(--fs)); color: var(--accent2); background: var(--chip-bg); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  .tbl-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+
+  /* ── RESULT PREVIEW ── */
+  .preview-box {
+    background: #fff; color: #222; border-radius: 10px;
+    padding: 16px 20px; font-family: Georgia, serif; font-size: calc(0.9rem * var(--fs));
+  }
+  .preview-label { font-size: calc(0.68rem * var(--fs)); font-family: var(--font-mono); color: var(--muted); margin-bottom: 6px; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+    font-family: var(--font-mono); font-size: calc(0.75rem * var(--fs)); font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-num.g { background: rgba(94,240,160,0.15); color: var(--accent); }
+  .step-num.b { background: rgba(94,166,240,0.15); color: var(--accent2); }
+  .step-num.p { background: rgba(240,94,154,0.15); color: var(--accent3); }
+  .step-num.y { background: rgba(240,200,94,0.15); color: var(--accent4); }
+  .step-body h5 { font-size: calc(0.95rem * var(--fs)); font-weight: 700; margin-bottom: 3px; }
+  .step-body p { font-size: calc(0.88rem * var(--fs)); color: var(--muted); line-height: 1.6; }
+
+  /* ── KEYBOARD SHORTCUT ── */
+  kbd {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 7px; font-family: var(--font-mono);
+    font-size: calc(0.75rem * var(--fs)); color: var(--accent2);
+  }
+
+  /* ── BOTTOM NAV ── */
+  .bottom-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 28px; background: var(--surface); border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .slide-dots { display: flex; gap: 5px; flex-wrap: wrap; max-width: 60vw; }
+  .dot-ind {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--border);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .dot-ind.active { background: var(--accent); transform: scale(1.3); }
+  .dot-ind.day2 { }
+  .dot-ind.day3 { }
+  .hint { font-size: calc(0.72rem * var(--fs)); color: var(--muted); font-family: var(--font-mono); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ══════════════════════════════
+     PRINT STYLES
+     ══════════════════════════════ */
+  @media print {
+    @page {
+      size: A4 landscape;
+      margin: 12mm 14mm;
+    }
+
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+    body {
+      height: auto !important;
+      overflow: visible !important;
+      background: #0b0d14 !important;
+      display: block !important;
+    }
+
+    /* Hide interactive chrome */
+    .topbar, .progress-bar-wrap, .bottom-nav { display: none !important; }
+
+    /* Show ALL slides as stacked pages */
+    .slide-area {
+      overflow: visible !important;
+      height: auto !important;
+      position: static !important;
+    }
+
+    .slide {
+      display: flex !important;
+      position: relative !important;
+      width: 100% !important;
+      height: 170mm !important;
+      min-height: 170mm !important;
+      max-height: 170mm !important;
+      overflow: hidden !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      padding: 22px 36px !important;
+      box-sizing: border-box !important;
+      background: #0b0d14 !important;
+    }
+
+    .slide:last-child { page-break-after: avoid !important; break-after: avoid !important; }
+
+    /* Slide cover: dark radial keeps printing */
+    .slide-cover {
+      background: radial-gradient(ellipse at 70% 40%, #1a2e1a 0%, #0b0d14 60%) !important;
+    }
+    .day-cover {
+      background: radial-gradient(ellipse at 60% 50%, #131a2e 0%, #0b0d14 70%) !important;
+    }
+
+    /* Scale down fonts slightly for print */
+    .slide-cover h1 { font-size: 2rem !important; }
+    .day-cover h2 { font-size: 1.8rem !important; }
+    .slide-content h2 { font-size: 1.4rem !important; }
+    .subtitle { font-size: 0.78rem !important; margin-bottom: 14px !important; }
+    .divider { margin-bottom: 14px !important; }
+
+    /* Tighten spacing */
+    .two-col { gap: 16px !important; }
+    .three-col { gap: 10px !important; }
+    .steps { gap: 7px !important; }
+    .agenda-grid { gap: 8px !important; }
+
+    .card { padding: 12px 14px !important; }
+    .card p, .card li { font-size: 0.75rem !important; }
+    .card h4 { font-size: 0.8rem !important; }
+
+    .step { padding: 9px 12px !important; }
+    .step-body h5 { font-size: 0.8rem !important; }
+    .step-body p { font-size: 0.72rem !important; }
+
+    .hbox { padding: 10px 14px !important; font-size: 0.76rem !important; margin-top: 10px !important; }
+
+    .code-block pre { padding: 10px 14px !important; font-size: 0.7rem !important; line-height: 1.6 !important; }
+    .code-header { padding: 6px 12px !important; }
+    .code-filename { font-size: 0.6rem !important; }
+
+    table { font-size: 0.72rem !important; }
+    th { padding: 7px 10px !important; font-size: 0.62rem !important; }
+    td { padding: 6px 10px !important; }
+
+    .preview-box { padding: 10px 14px !important; font-size: 0.8rem !important; }
+    .preview-label { font-size: 0.58rem !important; }
+
+    .tag-anatomy { padding: 12px 18px !important; font-size: 0.85rem !important; }
+    .anat-part small { font-size: 0.52rem !important; }
+
+    .agenda-item { padding: 10px 12px !important; }
+    .agenda-item .topic { font-size: 0.8rem !important; }
+    .agenda-item .num { font-size: 0.62rem !important; }
+
+    .pill { padding: 4px 12px !important; font-size: 0.68rem !important; }
+    .pill-row { margin-bottom: 16px !important; }
+
+    .slide-cover p { font-size: 0.9rem !important; margin-bottom: 16px !important; }
+    .day-cover p { font-size: 0.85rem !important; margin-bottom: 16px !important; }
+
+    .eyebrow { font-size: 0.65rem !important; margin-bottom: 12px !important; }
+    .day-badge { font-size: 0.62rem !important; margin-bottom: 14px !important; }
+
+    /* Slide number watermark */
+    .slide::after {
+      content: attr(data-slide-num);
+      position: absolute;
+      bottom: 8px;
+      right: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: #3a3f60;
+    }
+  }
+
+  .tag-anatomy {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; font-family: var(--font-mono); font-size: calc(1.1rem * var(--fs));
+    background: var(--anatomy-bg); border-radius: 12px; padding: 20px 28px;
+    font-size: calc(1rem * var(--fs));
+    border: 1px solid var(--anatomy-border); flex-wrap: wrap; gap: 4px;
+    margin: 10px 0;
+  }
+  .anat-part { padding: 6px 10px; border-radius: 6px; text-align: center; }
+  .anat-part small { display: block; font-size: calc(0.62rem * var(--fs)); color: var(--muted); margin-top: 4px; letter-spacing: 1px; }
+  .anat-open { background: rgba(94,166,240,0.18); color: var(--accent2); border: 1px solid rgba(94,166,240,0.3); }
+  .anat-tag  { background: rgba(94,240,160,0.18); color: var(--accent); border: 1px solid rgba(94,240,160,0.3); }
+  .anat-close-slash { background: rgba(240,94,154,0.16); color: var(--accent3); border: 1px solid rgba(240,94,154,0.28); }
+  .anat-content { background: rgba(240,200,94,0.14); color: var(--accent4); border: 1px solid rgba(240,200,94,0.28); }
+  .anat-sym { color: var(--muted); padding: 6px 4px; }
+
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="logo">&lt;HTML/&gt;</span>
+    <div class="day-tabs">
+      <button class="day-tab active" onclick="goToDay(1)">Day 1</button>
+      <button class="day-tab" onclick="goToDay(2)">Day 2</button>
+      <button class="day-tab" onclick="goToDay(3)">Day 3</button>
+      <button class="day-tab css-tab" onclick="goToDay(4)">CSS</button>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span id="slide-counter">1 / 30</span>
+    <div class="font-ctrl" title="Adjust text size">
+      <button class="font-btn" onclick="changeFont(-1)" title="Smaller">A−</button>
+      <span class="font-label" id="fontLabel">100%</span>
+      <button class="font-btn" onclick="changeFont(1)" title="Larger">A+</button>
+    </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+      <span id="themeIcon">☀️</span>
+    </button>
+    <button class="print-btn" onclick="window.print()">🖨️ Print / PDF</button>
+    <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" disabled>&#8592;</button>
+    <button class="nav-btn" id="nextBtn" onclick="navigate(1)">&#8594;</button>
+  </div>
+</div>
+<div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- ════════════════════════════════
+     SLIDES
+     ════════════════════════════════ -->
+<div class="slide-area">
+
+  <!-- ══ SLIDE 0: COURSE COVER ══ -->
+  <div class="slide slide-cover active" id="slide-0" data-slide-num="1 / 30">
+    <div class="eyebrow">&#9670; 3-Day Beginner Course</div>
+    <h1>Learn <span>HTML</span><br>from Scratch</h1>
+    <p>A structured, hands-on introduction to HyperText Markup Language — following the W3Schools learning path.</p>
+    <div class="pill-row">
+      <span class="pill pill-green">Day 1 · Foundations</span>
+      <span class="pill pill-blue">Day 2 · Structure &amp; Media</span>
+      <span class="pill pill-pink">Day 3 · Forms, Tables &amp; HTML5</span>
+      <span class="pill pill-yellow">2–3 hrs / day</span>
+    </div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;">
+      <div class="card" style="max-width:240px;">
+        <div class="icon">🎯</div>
+        <h4>Goal</h4>
+        <p>Build real web pages confidently using correct HTML structure.</p>
+      </div>
+      <div class="card" style="max-width:240px;">
+        <div class="icon">🛠️</div>
+        <h4>Tools Needed</h4>
+        <p>A text editor (VS Code) and any modern web browser.</p>
+      </div>
+      <div class="card" style="max-width:240px;">
+        <div class="icon">📚</div>
+        <h4>Reference</h4>
+        <p>We follow the <strong>W3Schools HTML Tutorial</strong> structure throughout.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       DAY 1
+       ══════════════════════ -->
+
+  <!-- SLIDE 1: Day 1 Cover -->
+  <div class="slide day-cover" id="slide-1" data-slide-num="2 / 30">
+    <div class="day-badge d1">&#9670; Day 1 &nbsp;·&nbsp; 2–3 Hours</div>
+    <h2>HTML Foundations</h2>
+    <p>Learn what HTML is, how it works, and build your first web page. Understand structure, headings, paragraphs, text formatting, links, and images.</p>
+    <div class="agenda-grid">
+      <div class="agenda-item"><div class="num">01</div><div class="topic">What is HTML?</div></div>
+      <div class="agenda-item"><div class="num">02</div><div class="topic">HTML Document Structure</div></div>
+      <div class="agenda-item"><div class="num">03</div><div class="topic">Tags &amp; Elements</div></div>
+      <div class="agenda-item"><div class="num">04</div><div class="topic">Headings &amp; Paragraphs</div></div>
+      <div class="agenda-item"><div class="num">05</div><div class="topic">Text Formatting</div></div>
+      <div class="agenda-item"><div class="num">06</div><div class="topic">Links &amp; Attributes</div></div>
+      <div class="agenda-item"><div class="num">07</div><div class="topic">Images</div></div>
+      <div class="agenda-item"><div class="num">08</div><div class="topic">Comments &amp; Practice</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: What is HTML? -->
+  <div class="slide slide-content" id="slide-2" data-slide-num="3 / 30">
+    <h2>What is <span class="hl">HTML</span>?</h2>
+    <div class="subtitle">Day 1 · Topic 01</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num g">H</div>
+            <div class="step-body"><h5>HyperText</h5><p>Text with links that connect to other pages or resources.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num b">M</div>
+            <div class="step-body"><h5>Markup</h5><p>A way to annotate text with special tags to give it meaning.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num p">L</div>
+            <div class="step-body"><h5>Language</h5><p>A set of rules and symbols that browsers understand.</p></div>
+          </div>
+        </div>
+        <div class="hbox hbox-green" style="margin-top:14px;">
+          <strong>HTML is NOT a programming language.</strong> It is a <em>markup</em> language — it describes the <em>structure</em> and <em>meaning</em> of content.
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="icon">🌐</div>
+          <h4>What browsers do</h4>
+          <p>Browsers read HTML files and display them as web pages. The tags are not shown — they tell the browser <em>how</em> to display content.</p>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">example.html</span></div>
+          <pre><span class="tag">&lt;h1&gt;</span><span class="t">Hello, World!</span><span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;p&gt;</span><span class="t">This is a paragraph.</span><span class="tag">&lt;/p&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: HTML Document Structure -->
+  <div class="slide slide-content" id="slide-3" data-slide-num="4 / 30">
+    <h2>HTML <span class="hl">Document Structure</span></h2>
+    <div class="subtitle">Day 1 · Topic 02 — Every HTML file must follow this structure</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="code-block">
+        <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">index.html</span></div>
+        <pre><span class="cm">&lt;!-- Declaration --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+
+<span class="cm">&lt;!-- Root element --&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="val">"en"</span><span class="tag">&gt;</span>
+
+  <span class="cm">&lt;!-- Meta information --&gt;</span>
+  <span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset=</span><span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span><span class="t">My First Page</span><span class="tag">&lt;/title&gt;</span>
+  <span class="tag">&lt;/head&gt;</span>
+
+  <span class="cm">&lt;!-- Visible content --&gt;</span>
+  <span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span><span class="t">Hello, World!</span><span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span><span class="t">Welcome to my page.</span><span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/body&gt;</span>
+
+<span class="tag">&lt;/html&gt;</span></pre>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num g">1</div><div class="step-body"><h5>&lt;!DOCTYPE html&gt;</h5><p>Tells the browser this is an HTML5 document. Always first!</p></div></div>
+        <div class="step"><div class="step-num b">2</div><div class="step-body"><h5>&lt;html&gt;</h5><p>Root element. Contains the entire page. Add <code>lang="en"</code> for accessibility.</p></div></div>
+        <div class="step"><div class="step-num p">3</div><div class="step-body"><h5>&lt;head&gt;</h5><p>Invisible info: charset, title, links to CSS. Not displayed on the page.</p></div></div>
+        <div class="step"><div class="step-num y">4</div><div class="step-body"><h5>&lt;body&gt;</h5><p>Everything the user <em>sees</em> on the page goes here.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Tags & Elements -->
+  <div class="slide slide-content" id="slide-4" data-slide-num="5 / 30">
+    <h2>Tags &amp; <span class="hl2">Elements</span></h2>
+    <div class="subtitle">Day 1 · Topic 03 — The building blocks of HTML</div>
+    <div class="divider"></div>
+    <div class="tag-anatomy">
+      <div class="anat-part anat-open">&lt;<small>open bracket</small></div>
+      <div class="anat-part anat-tag">tagname<small>element name</small></div>
+      <div class="anat-part anat-open">&gt;<small>close bracket</small></div>
+      <div class="anat-part" style="width:16px;"></div>
+      <div class="anat-part anat-content">Content<small>text / child elements</small></div>
+      <div class="anat-part" style="width:16px;"></div>
+      <div class="anat-part anat-open">&lt;<small>open bracket</small></div>
+      <div class="anat-part anat-close-slash">/<small>closing</small></div>
+      <div class="anat-part anat-tag">tagname<small>same name</small></div>
+      <div class="anat-part anat-open">&gt;<small>close bracket</small></div>
+    </div>
+    <div class="two-col" style="margin-top:18px;">
+      <div>
+        <div class="hbox hbox-blue"><strong>Opening tag:</strong> <code style="font-family:var(--font-mono);color:var(--accent2);">&lt;p&gt;</code> — starts the element<br><strong>Closing tag:</strong> <code style="font-family:var(--font-mono);color:var(--accent3);">&lt;/p&gt;</code> — ends the element<br><strong>Content:</strong> Text or other elements between tags</div>
+        <div class="hbox hbox-yellow" style="margin-top:10px;"><strong>Void / Self-closing elements</strong> have no closing tag.<br>Examples: <code style="font-family:var(--font-mono);color:var(--accent4);">&lt;br&gt;</code> &nbsp;<code style="font-family:var(--font-mono);color:var(--accent4);">&lt;hr&gt;</code> &nbsp;<code style="font-family:var(--font-mono);color:var(--accent4);">&lt;img&gt;</code> &nbsp;<code style="font-family:var(--font-mono);color:var(--accent4);">&lt;meta&gt;</code></div>
+      </div>
+      <div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Tag</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;h1&gt;</code>…<code>&lt;h6&gt;</code></td><td>Headings (largest → smallest)</td></tr>
+              <tr><td><code>&lt;p&gt;</code></td><td>Paragraph</td></tr>
+              <tr><td><code>&lt;a&gt;</code></td><td>Hyperlink (anchor)</td></tr>
+              <tr><td><code>&lt;img&gt;</code></td><td>Image</td></tr>
+              <tr><td><code>&lt;br&gt;</code></td><td>Line break</td></tr>
+              <tr><td><code>&lt;hr&gt;</code></td><td>Horizontal rule / divider</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Headings & Paragraphs -->
+  <div class="slide slide-content" id="slide-5" data-slide-num="6 / 30">
+    <h2><span class="hl">Headings</span> &amp; Paragraphs</h2>
+    <div class="subtitle">Day 1 · Topic 04 — Organizing text content</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="code-block">
+        <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">headings.html</span></div>
+        <pre><span class="tag">&lt;h1&gt;</span><span class="t">Main Title (biggest)</span><span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span><span class="t">Section Heading</span><span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;h3&gt;</span><span class="t">Sub-section</span><span class="tag">&lt;/h3&gt;</span>
+<span class="tag">&lt;h4&gt;</span><span class="t">Sub-sub-section</span><span class="tag">&lt;/h4&gt;</span>
+<span class="tag">&lt;h5&gt;</span><span class="t">Smaller heading</span><span class="tag">&lt;/h5&gt;</span>
+<span class="tag">&lt;h6&gt;</span><span class="t">Smallest heading</span><span class="tag">&lt;/h6&gt;</span>
+
+<span class="tag">&lt;p&gt;</span><span class="t">First paragraph text here.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span><span class="t">Second paragraph.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;br&gt;</span>
+<span class="tag">&lt;hr&gt;</span></pre>
+      </div>
+      <div>
+        <div class="preview-label">Browser Preview</div>
+        <div class="preview-box">
+          <h1 style="font-size: calc(1.4rem * var(--fs));font-family:Georgia;margin:2px 0;">Main Title (biggest)</h1>
+          <h2 style="font-size: calc(1.1rem * var(--fs));font-family:Georgia;margin:2px 0;">Section Heading</h2>
+          <h3 style="font-size: calc(0.95rem * var(--fs));font-family:Georgia;margin:2px 0;">Sub-section</h3>
+          <h4 style="font-size: calc(0.85rem * var(--fs));font-family:Georgia;margin:2px 0;">Sub-sub-section</h4>
+          <p style="font-size: calc(0.82rem * var(--fs));margin:6px 0;">First paragraph text here.</p>
+          <p style="font-size: calc(0.82rem * var(--fs));margin:0;">Second paragraph.</p>
+          <hr style="margin:8px 0;">
+        </div>
+        <div class="hbox hbox-green" style="margin-top:12px;">
+          <strong>Best practice:</strong> Use only <em>one</em> <code>&lt;h1&gt;</code> per page (main title). Use headings in order — don't skip levels.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Text Formatting -->
+  <div class="slide slide-content" id="slide-6" data-slide-num="7 / 30">
+    <h2>Text <span class="hl3">Formatting</span></h2>
+    <div class="subtitle">Day 1 · Topic 05 — Inline elements that style text</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Tag</th><th>Effect</th><th>Use When</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;b&gt;</code></td><td><b>Bold</b></td><td>Visual emphasis only</td></tr>
+            <tr><td><code>&lt;strong&gt;</code></td><td><strong>Strong</strong></td><td>Important text (semantic)</td></tr>
+            <tr><td><code>&lt;i&gt;</code></td><td><i>Italic</i></td><td>Visual style only</td></tr>
+            <tr><td><code>&lt;em&gt;</code></td><td><em>Emphasis</em></td><td>Stressed text (semantic)</td></tr>
+            <tr><td><code>&lt;mark&gt;</code></td><td><mark>Highlighted</mark></td><td>Highlight / search result</td></tr>
+            <tr><td><code>&lt;small&gt;</code></td><td><small>Small text</small></td><td>Fine print, captions</td></tr>
+            <tr><td><code>&lt;del&gt;</code></td><td><del>Deleted</del></td><td>Removed content</td></tr>
+            <tr><td><code>&lt;ins&gt;</code></td><td><ins>Inserted</ins></td><td>Added content</td></tr>
+            <tr><td><code>&lt;sub&gt;</code></td><td>H<sub>2</sub>O</td><td>Subscript (math/chem)</td></tr>
+            <tr><td><code>&lt;sup&gt;</code></td><td>x<sup>2</sup></td><td>Superscript (math)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">formatting.html</span></div>
+          <pre><span class="tag">&lt;p&gt;</span>
+  <span class="t">Water is </span><span class="tag">&lt;strong&gt;</span><span class="t">essential</span><span class="tag">&lt;/strong&gt;</span><span class="t">.</span>
+<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span>
+  <span class="t">H</span><span class="tag">&lt;sub&gt;</span><span class="t">2</span><span class="tag">&lt;/sub&gt;</span>
+  <span class="t">O is the formula.</span>
+<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span>
+  <span class="t">Sale price: </span>
+  <span class="tag">&lt;del&gt;</span><span class="t">$50</span><span class="tag">&lt;/del&gt;</span>
+  <span class="t"> </span><span class="tag">&lt;ins&gt;</span><span class="t">$30</span><span class="tag">&lt;/ins&gt;</span>
+<span class="tag">&lt;/p&gt;</span></pre>
+        </div>
+        <div class="hbox hbox-blue" style="margin-top:12px;">
+          <strong>Semantic vs Presentational:</strong> Prefer <code>&lt;strong&gt;</code> over <code>&lt;b&gt;</code> and <code>&lt;em&gt;</code> over <code>&lt;i&gt;</code> — semantic tags carry meaning for screen readers and SEO.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Links & Attributes -->
+  <div class="slide slide-content" id="slide-7" data-slide-num="8 / 30">
+    <h2>Links &amp; <span class="hl">Attributes</span></h2>
+    <div class="subtitle">Day 1 · Topic 06 — Connecting pages with &lt;a&gt; and understanding attributes</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">links.html</span></div>
+          <pre><span class="cm">&lt;!-- External link --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"https://www.w3schools.com"</span>
+   <span class="attr">target=</span><span class="val">"_blank"</span><span class="tag">&gt;</span>
+  <span class="t">Visit W3Schools</span>
+<span class="tag">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Internal link --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"about.html"</span><span class="tag">&gt;</span>
+  <span class="t">About Page</span>
+<span class="tag">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Jump to section --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"#contact"</span><span class="tag">&gt;</span>
+  <span class="t">Go to Contact</span>
+<span class="tag">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Email link --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"mailto:hi@email.com"</span><span class="tag">&gt;</span>
+  <span class="t">Send Email</span>
+<span class="tag">&lt;/a&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px;">
+          <h4>What are Attributes?</h4>
+          <p>Attributes provide extra info about an element. They go inside the opening tag as <strong>name="value"</strong> pairs.</p>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Attribute</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>href</code></td><td>URL the link goes to</td></tr>
+              <tr><td><code>target="_blank"</code></td><td>Opens in new tab</td></tr>
+              <tr><td><code>title</code></td><td>Tooltip on hover</td></tr>
+              <tr><td><code>id</code></td><td>Unique identifier</td></tr>
+              <tr><td><code>class</code></td><td>Group for CSS styling</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Images -->
+  <div class="slide slide-content" id="slide-8" data-slide-num="9 / 30">
+    <h2>Images <span class="hl2">&lt;img&gt;</span></h2>
+    <div class="subtitle">Day 1 · Topic 07 — Embedding images in web pages</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">images.html</span></div>
+          <pre><span class="cm">&lt;!-- Basic image --&gt;</span>
+<span class="tag">&lt;img</span>
+  <span class="attr">src=</span><span class="val">"photo.jpg"</span>
+  <span class="attr">alt=</span><span class="val">"A scenic photo"</span>
+<span class="tag">&gt;</span>
+
+<span class="cm">&lt;!-- With size --&gt;</span>
+<span class="tag">&lt;img</span>
+  <span class="attr">src=</span><span class="val">"logo.png"</span>
+  <span class="attr">alt=</span><span class="val">"Company Logo"</span>
+  <span class="attr">width=</span><span class="val">"200"</span>
+  <span class="attr">height=</span><span class="val">"100"</span>
+<span class="tag">&gt;</span>
+
+<span class="cm">&lt;!-- Image as a link --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"home.html"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src=</span><span class="val">"logo.png"</span>
+       <span class="attr">alt=</span><span class="val">"Home"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/a&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="steps">
+          <div class="step"><div class="step-num g">src</div><div class="step-body"><h5>Source path</h5><p>Relative path (<code>images/pic.jpg</code>) or full URL to the image file.</p></div></div>
+          <div class="step"><div class="step-num b">alt</div><div class="step-body"><h5>Alt text ⚠️ Required!</h5><p>Describes the image for screen readers and shows if image fails to load.</p></div></div>
+          <div class="step"><div class="step-num y">size</div><div class="step-body"><h5>Width &amp; Height</h5><p>Set in pixels. Helps browser reserve space while loading. Best set via CSS too.</p></div></div>
+        </div>
+        <div class="hbox hbox-pink" style="margin-top:12px;">
+          <strong>Supported formats:</strong> JPG/JPEG, PNG, GIF, SVG, WebP. Use <strong>WebP</strong> for best modern web performance.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Comments & Day 1 Practice -->
+  <div class="slide slide-content" id="slide-9" data-slide-num="10 / 30">
+    <h2>Comments &amp; <span class="hl">Day 1 Practice</span></h2>
+    <div class="subtitle">Day 1 · Topic 08 — HTML comments + hands-on exercise</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">practice.html</span></div>
+          <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;title&gt;</span><span class="t">About Me</span><span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+  <span class="cm">&lt;!-- This is a comment --&gt;</span>
+  <span class="tag">&lt;h1&gt;</span><span class="t">My Name</span><span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="t">I am learning </span>
+    <span class="tag">&lt;strong&gt;</span><span class="t">HTML</span><span class="tag">&lt;/strong&gt;</span>
+    <span class="t"> at this course.</span>
+  <span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src=</span><span class="val">"me.jpg"</span>
+       <span class="attr">alt=</span><span class="val">"My photo"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"mailto:me@email.com"</span><span class="tag">&gt;</span>
+      <span class="t">Contact me</span>
+    <span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <h4>📝 HTML Comments</h4>
+          <p>Comments are not displayed in the browser. Use them to explain your code or temporarily hide content.</p>
+          <div style="margin-top:8px;font-family:var(--font-mono);font-size: calc(0.8rem * var(--fs));color:var(--accent3);">&lt;!-- Your comment here --&gt;</div>
+        </div>
+        <div class="card">
+          <h4>🏋️ Day 1 Exercise</h4>
+          <p>Build an <strong>"About Me"</strong> page that includes:</p>
+          <ul style="margin-top:8px;padding-left:16px;">
+            <li>Correct HTML5 structure</li>
+            <li>A heading with your name</li>
+            <li>A paragraph about yourself</li>
+            <li>A photo (or placeholder)</li>
+            <li>A link to your email or a website</li>
+            <li>At least one formatted word (bold or italic)</li>
+            <li>One HTML comment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       DAY 2
+       ══════════════════════ -->
+
+  <!-- SLIDE 10: Day 2 Cover -->
+  <div class="slide day-cover" id="slide-10" data-slide-num="11 / 30">
+    <div class="day-badge d2">&#9670; Day 2 &nbsp;·&nbsp; 2–3 Hours</div>
+    <h2>Structure &amp; Media</h2>
+    <p>Go deeper with HTML. Master lists, tables, semantic structure, divs &amp; spans, colors, and embedding media — audio, video, and more.</p>
+    <div class="agenda-grid">
+      <div class="agenda-item"><div class="num">01</div><div class="topic">Lists (ul, ol, dl)</div></div>
+      <div class="agenda-item"><div class="num">02</div><div class="topic">Tables</div></div>
+      <div class="agenda-item"><div class="num">03</div><div class="topic">Block vs Inline</div></div>
+      <div class="agenda-item"><div class="num">04</div><div class="topic">div &amp; span</div></div>
+      <div class="agenda-item"><div class="num">05</div><div class="topic">Classes &amp; IDs</div></div>
+      <div class="agenda-item"><div class="num">06</div><div class="topic">HTML Colors</div></div>
+      <div class="agenda-item"><div class="num">07</div><div class="topic">Semantic HTML5</div></div>
+      <div class="agenda-item"><div class="num">08</div><div class="topic">Audio &amp; Video</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: Lists -->
+  <div class="slide slide-content" id="slide-11" data-slide-num="12 / 30">
+    <h2>HTML <span class="hl2">Lists</span></h2>
+    <div class="subtitle">Day 2 · Topic 01 — Unordered, ordered, and description lists</div>
+    <div class="divider"></div>
+    <div class="three-col">
+      <div>
+        <div class="hbox hbox-green" style="margin-bottom:10px;"><strong>Unordered List</strong> — bullets</div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="t">HTML</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="t">CSS</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="t">JavaScript</span><span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span></pre>
+        </div>
+        <div class="preview-box" style="margin-top:8px;padding:10px 14px;font-size: calc(0.82rem * var(--fs));">
+          <ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </div>
+      </div>
+      <div>
+        <div class="hbox hbox-blue" style="margin-bottom:10px;"><strong>Ordered List</strong> — numbered</div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;ol&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="t">Step One</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="t">Step Two</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="t">Step Three</span><span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span></pre>
+        </div>
+        <div class="preview-box" style="margin-top:8px;padding:10px 14px;font-size: calc(0.82rem * var(--fs));">
+          <ol><li>Step One</li><li>Step Two</li><li>Step Three</li></ol>
+        </div>
+      </div>
+      <div>
+        <div class="hbox hbox-pink" style="margin-bottom:10px;"><strong>Description List</strong> — term &amp; definition</div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;dl&gt;</span>
+  <span class="tag">&lt;dt&gt;</span><span class="t">HTML</span><span class="tag">&lt;/dt&gt;</span>
+  <span class="tag">&lt;dd&gt;</span><span class="t">Markup lang</span><span class="tag">&lt;/dd&gt;</span>
+  <span class="tag">&lt;dt&gt;</span><span class="t">CSS</span><span class="tag">&lt;/dt&gt;</span>
+  <span class="tag">&lt;dd&gt;</span><span class="t">Styling lang</span><span class="tag">&lt;/dd&gt;</span>
+<span class="tag">&lt;/dl&gt;</span></pre>
+        </div>
+        <div class="preview-box" style="margin-top:8px;padding:10px 14px;font-size: calc(0.82rem * var(--fs));">
+          <dl><dt><b>HTML</b></dt><dd>Markup lang</dd><dt><b>CSS</b></dt><dd>Styling lang</dd></dl>
+        </div>
+      </div>
+    </div>
+    <div class="hbox hbox-yellow" style="margin-top:12px;"><strong>Nesting lists:</strong> You can put a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> inside any <code>&lt;li&gt;</code> to create a nested (sub-) list.</div>
+  </div>
+
+  <!-- SLIDE 12: Tables -->
+  <div class="slide slide-content" id="slide-12" data-slide-num="13 / 30">
+    <h2>HTML <span class="hl3">Tables</span></h2>
+    <div class="subtitle">Day 2 · Topic 02 — Displaying tabular data</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="code-block">
+        <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">table.html</span></div>
+        <pre><span class="tag">&lt;table</span> <span class="attr">border=</span><span class="val">"1"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;caption&gt;</span><span class="t">Student Scores</span><span class="tag">&lt;/caption&gt;</span>
+  <span class="tag">&lt;thead&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th&gt;</span><span class="t">Name</span><span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span><span class="t">Score</span><span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span><span class="t">Grade</span><span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/thead&gt;</span>
+  <span class="tag">&lt;tbody&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span><span class="t">Alice</span><span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span><span class="t">95</span><span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span><span class="t">A</span><span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span><span class="t">Bob</span><span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span><span class="t">78</span><span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span><span class="t">B</span><span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tbody&gt;</span>
+<span class="tag">&lt;/table&gt;</span></pre>
+      </div>
+      <div>
+        <div class="steps">
+          <div class="step"><div class="step-num g">&lt;table&gt;</div><div class="step-body"><h5>Table container</h5><p>Wraps the entire table.</p></div></div>
+          <div class="step"><div class="step-num b">&lt;tr&gt;</div><div class="step-body"><h5>Table Row</h5><p>Each horizontal row of data.</p></div></div>
+          <div class="step"><div class="step-num y">&lt;th&gt;</div><div class="step-body"><h5>Table Header</h5><p>Bold, centered column headers in <code>&lt;thead&gt;</code>.</p></div></div>
+          <div class="step"><div class="step-num p">&lt;td&gt;</div><div class="step-body"><h5>Table Data</h5><p>Regular cell data inside <code>&lt;tbody&gt;</code>.</p></div></div>
+        </div>
+        <div class="hbox hbox-blue" style="margin-top:12px;">
+          Use <code>colspan="2"</code> or <code>rowspan="2"</code> on a <code>&lt;td&gt;</code> to merge cells across columns or rows.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: Block vs Inline / div & span -->
+  <div class="slide slide-content" id="slide-13" data-slide-num="14 / 30">
+    <h2>Block vs Inline &amp; <span class="hl">&lt;div&gt;</span> / <span class="hl2">&lt;span&gt;</span></h2>
+    <div class="subtitle">Day 2 · Topics 03 &amp; 04 — Layout containers</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="card" style="margin-bottom:12px; border-left:3px solid var(--accent);">
+          <h4>Block-level elements</h4>
+          <p>Start on a new line and take full width. Examples: <code>&lt;div&gt;</code>, <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;table&gt;</code></p>
+        </div>
+        <div class="card" style="border-left:3px solid var(--accent2);">
+          <h4>Inline elements</h4>
+          <p>Flow within text, take only as much width as needed. Examples: <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;img&gt;</code></p>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">containers.html</span></div>
+        <pre><span class="cm">&lt;!-- div: block container for layout --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class=</span><span class="val">"section"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2&gt;</span><span class="t">About</span><span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="t">Some text here.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- span: inline container for styling --&gt;</span>
+<span class="tag">&lt;p&gt;</span>
+  <span class="t">The sky is </span>
+  <span class="tag">&lt;span</span> <span class="attr">style=</span><span class="val">"color:blue;"</span><span class="tag">&gt;</span>
+    <span class="t">blue</span>
+  <span class="tag">&lt;/span&gt;</span>
+  <span class="t"> today.</span>
+<span class="tag">&lt;/p&gt;</span></pre>
+      </div>
+    </div>
+    <div class="hbox hbox-yellow" style="margin-top:14px;">
+      <strong>&lt;div&gt;</strong> has no visual style on its own — it's purely a grouping container. <strong>&lt;span&gt;</strong> is the same but inline. Both become powerful when combined with CSS classes.
+    </div>
+  </div>
+
+  <!-- SLIDE 14: Classes & IDs -->
+  <div class="slide slide-content" id="slide-14" data-slide-num="15 / 30">
+    <h2>Classes <span class="hl2">&amp;</span> IDs</h2>
+    <div class="subtitle">Day 2 · Topic 05 — Targeting elements with CSS and JavaScript</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">class-id.html</span></div>
+          <pre><span class="cm">&lt;!-- class: reusable, multiple elements --&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class=</span><span class="val">"highlight"</span><span class="tag">&gt;</span>
+  <span class="t">This is highlighted.</span>
+<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class=</span><span class="val">"highlight"</span><span class="tag">&gt;</span>
+  <span class="t">Also highlighted.</span>
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- id: unique, one element only --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id=</span><span class="val">"main-header"</span><span class="tag">&gt;</span>
+  <span class="t">Site Header</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Multiple classes --&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class=</span><span class="val">"card large blue"</span><span class="tag">&gt;</span>
+  <span class="t">Multi-class element</span>
+<span class="tag">&lt;/p&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Feature</th><th>class</th><th>id</th></tr></thead>
+            <tbody>
+              <tr><td>Syntax in HTML</td><td><code>class="name"</code></td><td><code>id="name"</code></td></tr>
+              <tr><td>CSS selector</td><td><code>.name</code></td><td><code>#name</code></td></tr>
+              <tr><td>Reusability</td><td>Many elements</td><td>One element only</td></tr>
+              <tr><td>Multiple per element</td><td>Yes</td><td>No</td></tr>
+              <tr><td>JS targeting</td><td>getElementsByClassName</td><td>getElementById</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hbox hbox-green" style="margin-top:12px;">
+          <strong>Rule:</strong> Use <code>class</code> for styling patterns used on many elements. Use <code>id</code> for unique elements like the main header, footer, or a specific section.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: HTML Colors -->
+  <div class="slide slide-content" id="slide-15" data-slide-num="16 / 30">
+    <h2>HTML <span class="hl3">Colors</span></h2>
+    <div class="subtitle">Day 2 · Topic 06 — Color values in HTML and CSS</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Format</th><th>Example</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Color Name</td><td><code>red</code></td><td>140+ built-in names</td></tr>
+            <tr><td>HEX</td><td><code>#ff0000</code></td><td>Red, Green, Blue in hex</td></tr>
+            <tr><td>RGB</td><td><code>rgb(255,0,0)</code></td><td>Red 0–255, Green 0–255, Blue 0–255</td></tr>
+            <tr><td>RGBA</td><td><code>rgba(255,0,0,0.5)</code></td><td>RGB + Alpha (transparency 0–1)</td></tr>
+            <tr><td>HSL</td><td><code>hsl(0,100%,50%)</code></td><td>Hue, Saturation, Lightness</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">colors.html</span></div>
+          <pre><span class="tag">&lt;h1</span> <span class="attr">style=</span><span class="val">"color: #e74c3c;"</span><span class="tag">&gt;</span>
+  <span class="t">Red Heading</span>
+<span class="tag">&lt;/h1&gt;</span>
+
+<span class="tag">&lt;p</span> <span class="attr">style=</span><span class="val">"background-color:
+         rgba(0,128,255,0.2);"</span><span class="tag">&gt;</span>
+  <span class="t">Blue tinted paragraph</span>
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;div</span> <span class="attr">style=</span><span class="val">"color: hsl(120,60%,40%);"</span><span class="tag">&gt;</span>
+  <span class="t">Green text via HSL</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+          <div style="background:#e74c3c;color:#fff;padding:8px 14px;border-radius:6px;font-size: calc(0.75rem * var(--fs));font-family:var(--font-mono);">#e74c3c</div>
+          <div style="background:#2ecc71;color:#fff;padding:8px 14px;border-radius:6px;font-size: calc(0.75rem * var(--fs));font-family:var(--font-mono);">#2ecc71</div>
+          <div style="background:#3498db;color:#fff;padding:8px 14px;border-radius:6px;font-size: calc(0.75rem * var(--fs));font-family:var(--font-mono);">#3498db</div>
+          <div style="background:#f39c12;color:#fff;padding:8px 14px;border-radius:6px;font-size: calc(0.75rem * var(--fs));font-family:var(--font-mono);">#f39c12</div>
+          <div style="background:#9b59b6;color:#fff;padding:8px 14px;border-radius:6px;font-size: calc(0.75rem * var(--fs));font-family:var(--font-mono);">#9b59b6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 16: Semantic HTML5 -->
+  <div class="slide slide-content" id="slide-16" data-slide-num="17 / 30">
+    <h2>Semantic <span class="hl">HTML5</span> Elements</h2>
+    <div class="subtitle">Day 2 · Topic 07 — Meaningful structure over generic divs</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="code-block">
+        <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">semantic.html</span></div>
+        <pre><span class="tag">&lt;body&gt;</span>
+
+  <span class="tag">&lt;header&gt;</span>
+    <span class="tag">&lt;nav&gt;</span><span class="t">Navigation links</span><span class="tag">&lt;/nav&gt;</span>
+  <span class="tag">&lt;/header&gt;</span>
+
+  <span class="tag">&lt;main&gt;</span>
+    <span class="tag">&lt;article&gt;</span>
+      <span class="tag">&lt;h2&gt;</span><span class="t">Blog Post Title</span><span class="tag">&lt;/h2&gt;</span>
+      <span class="tag">&lt;section&gt;</span>
+        <span class="t">Introduction section...</span>
+      <span class="tag">&lt;/section&gt;</span>
+      <span class="tag">&lt;section&gt;</span>
+        <span class="t">Body section...</span>
+      <span class="tag">&lt;/section&gt;</span>
+    <span class="tag">&lt;/article&gt;</span>
+    <span class="tag">&lt;aside&gt;</span><span class="t">Related links</span><span class="tag">&lt;/aside&gt;</span>
+  <span class="tag">&lt;/main&gt;</span>
+
+  <span class="tag">&lt;footer&gt;</span><span class="t">Copyright info</span><span class="tag">&lt;/footer&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span></pre>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Tag</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;header&gt;</code></td><td>Page/section header with logo, nav</td></tr>
+            <tr><td><code>&lt;nav&gt;</code></td><td>Navigation menu links</td></tr>
+            <tr><td><code>&lt;main&gt;</code></td><td>Primary content (one per page)</td></tr>
+            <tr><td><code>&lt;article&gt;</code></td><td>Self-contained content (blog post, news)</td></tr>
+            <tr><td><code>&lt;section&gt;</code></td><td>Thematic grouping of content</td></tr>
+            <tr><td><code>&lt;aside&gt;</code></td><td>Sidebar / related content</td></tr>
+            <tr><td><code>&lt;footer&gt;</code></td><td>Page/section footer</td></tr>
+            <tr><td><code>&lt;figure&gt;</code></td><td>Image with caption</td></tr>
+            <tr><td><code>&lt;time&gt;</code></td><td>Date/time value</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 17: Audio & Video -->
+  <div class="slide slide-content" id="slide-17" data-slide-num="18 / 30">
+    <h2>Audio &amp; <span class="hl2">Video</span></h2>
+    <div class="subtitle">Day 2 · Topic 08 — Embedding media with HTML5</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="hbox hbox-blue" style="margin-bottom:12px;"><strong>&lt;audio&gt;</strong> — embed sound files</div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;audio</span>
+  <span class="attr">controls</span>
+  <span class="attr">autoplay</span>
+  <span class="attr">loop</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;source</span>
+    <span class="attr">src=</span><span class="val">"music.mp3"</span>
+    <span class="attr">type=</span><span class="val">"audio/mpeg"</span><span class="tag">&gt;</span>
+  <span class="t">Your browser does not</span>
+  <span class="t">support audio.</span>
+<span class="tag">&lt;/audio&gt;</span></pre>
+        </div>
+        <div class="hbox hbox-green" style="margin-top:10px; font-size: calc(0.78rem * var(--fs));">
+          <strong>Attributes:</strong> <code>controls</code> shows play/pause. <code>autoplay</code> plays on load. <code>loop</code> repeats. <code>muted</code> starts muted.
+        </div>
+      </div>
+      <div>
+        <div class="hbox hbox-pink" style="margin-bottom:12px;"><strong>&lt;video&gt;</strong> — embed video files</div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;video</span>
+  <span class="attr">width=</span><span class="val">"400"</span>
+  <span class="attr">controls</span>
+  <span class="attr">poster=</span><span class="val">"thumbnail.jpg"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;source</span>
+    <span class="attr">src=</span><span class="val">"clip.mp4"</span>
+    <span class="attr">type=</span><span class="val">"video/mp4"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;source</span>
+    <span class="attr">src=</span><span class="val">"clip.webm"</span>
+    <span class="attr">type=</span><span class="val">"video/webm"</span><span class="tag">&gt;</span>
+  <span class="t">Video not supported.</span>
+<span class="tag">&lt;/video&gt;</span></pre>
+        </div>
+        <div class="hbox hbox-yellow" style="margin-top:10px; font-size: calc(0.78rem * var(--fs));">
+          <strong>Multiple &lt;source&gt; tags</strong> ensure browser compatibility. The browser picks the first format it supports.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 18: Day 2 Practice -->
+  <div class="slide slide-content" id="slide-18" data-slide-num="19 / 30">
+    <h2>Day 2 <span class="hl">Practice Project</span></h2>
+    <div class="subtitle">Day 2 · Build a structured, multi-section webpage</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h4>🏋️ Exercise: My Hobby Page</h4>
+          <p>Build a page about your hobby using proper semantic structure:</p>
+          <ul style="margin-top:10px;padding-left:16px;line-height:2;">
+            <li><code>&lt;header&gt;</code> with a title and <code>&lt;nav&gt;</code> with 3 links</li>
+            <li><code>&lt;main&gt;</code> with at least 2 <code>&lt;section&gt;</code> elements</li>
+            <li>One <code>&lt;article&gt;</code> with a heading, paragraph, and image</li>
+            <li>An unordered list of favourite things</li>
+            <li>A table comparing 3 items (e.g. tools, games, books)</li>
+            <li>An <code>&lt;aside&gt;</code> with related links</li>
+            <li><code>&lt;footer&gt;</code> with your name and year</li>
+            <li>At least one use of <code>class</code> and one use of <code>id</code></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">hobby.html (skeleton)</span></div>
+          <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;title&gt;</span><span class="t">My Hobby</span><span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;header&gt;</span>
+    <span class="tag">&lt;h1&gt;</span><span class="t">My Hobby</span><span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;nav&gt;</span><span class="cm">&lt;!-- links --&gt;</span><span class="tag">&lt;/nav&gt;</span>
+  <span class="tag">&lt;/header&gt;</span>
+  <span class="tag">&lt;main&gt;</span>
+    <span class="cm">&lt;!-- sections, article, aside --&gt;</span>
+  <span class="tag">&lt;/main&gt;</span>
+  <span class="tag">&lt;footer&gt;</span><span class="cm">&lt;!-- footer --&gt;</span><span class="tag">&lt;/footer&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       DAY 3
+       ══════════════════════ -->
+
+  <!-- SLIDE 19: Day 3 Cover -->
+  <div class="slide day-cover" id="slide-19" data-slide-num="20 / 30">
+    <div class="day-badge d3">&#9670; Day 3 &nbsp;·&nbsp; 2–3 Hours</div>
+    <h2>Forms, HTML5 &amp; Final Project</h2>
+    <p>Master HTML forms to collect user input, explore HTML5 features like Canvas, and bring everything together in a final capstone project.</p>
+    <div class="agenda-grid">
+      <div class="agenda-item"><div class="num">01</div><div class="topic">HTML Forms</div></div>
+      <div class="agenda-item"><div class="num">02</div><div class="topic">Form Input Types</div></div>
+      <div class="agenda-item"><div class="num">03</div><div class="topic">Form Attributes</div></div>
+      <div class="agenda-item"><div class="num">04</div><div class="topic">HTML5 Canvas</div></div>
+      <div class="agenda-item"><div class="num">05</div><div class="topic">iFrames &amp; Meta Tags</div></div>
+      <div class="agenda-item"><div class="num">06</div><div class="topic">HTML Entities</div></div>
+      <div class="agenda-item"><div class="num">07</div><div class="topic">Accessibility Basics</div></div>
+      <div class="agenda-item"><div class="num">08</div><div class="topic">Final Project</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 20: HTML Forms -->
+  <div class="slide slide-content" id="slide-20" data-slide-num="21 / 30">
+    <h2>HTML <span class="hl3">Forms</span></h2>
+    <div class="subtitle">Day 3 · Topic 01 — Collecting user input</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="code-block">
+        <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">form.html</span></div>
+        <pre><span class="tag">&lt;form</span>
+  <span class="attr">action=</span><span class="val">"/submit"</span>
+  <span class="attr">method=</span><span class="val">"post"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for=</span><span class="val">"name"</span><span class="tag">&gt;</span>
+    <span class="t">Full Name:</span>
+  <span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span>
+    <span class="attr">type=</span><span class="val">"text"</span>
+    <span class="attr">id=</span><span class="val">"name"</span>
+    <span class="attr">name=</span><span class="val">"fullname"</span>
+    <span class="attr">placeholder=</span><span class="val">"Enter your name"</span>
+    <span class="attr">required</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for=</span><span class="val">"email"</span><span class="tag">&gt;</span>
+    <span class="t">Email:</span>
+  <span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span>
+    <span class="attr">type=</span><span class="val">"email"</span>
+    <span class="attr">id=</span><span class="val">"email"</span>
+    <span class="attr">name=</span><span class="val">"email"</span>
+    <span class="attr">required</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;button</span> <span class="attr">type=</span><span class="val">"submit"</span><span class="tag">&gt;</span>
+    <span class="t">Submit</span>
+  <span class="tag">&lt;/button&gt;</span>
+
+<span class="tag">&lt;/form&gt;</span></pre>
+      </div>
+      <div>
+        <div class="steps">
+          <div class="step"><div class="step-num g">action</div><div class="step-body"><h5>Where to send data</h5><p>URL of the server-side script that processes the form.</p></div></div>
+          <div class="step"><div class="step-num b">method</div><div class="step-body"><h5>GET vs POST</h5><p><code>GET</code>: data in URL (visible). <code>POST</code>: data in body (hidden, secure).</p></div></div>
+          <div class="step"><div class="step-num y">&lt;label&gt;</div><div class="step-body"><h5>Labels are vital!</h5><p>Link <code>for="id"</code> to input's <code>id</code>. Enables clicking label to focus input.</p></div></div>
+          <div class="step"><div class="step-num p">required</div><div class="step-body"><h5>Validation</h5><p>Browser won't submit if a required field is empty.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 21: Form Input Types -->
+  <div class="slide slide-content" id="slide-21" data-slide-num="22 / 30">
+    <h2>Form <span class="hl">Input Types</span></h2>
+    <div class="subtitle">Day 3 · Topic 02 — The many faces of &lt;input&gt;</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>type=""</th><th>Use for</th></tr></thead>
+          <tbody>
+            <tr><td><code>text</code></td><td>Single-line text</td></tr>
+            <tr><td><code>email</code></td><td>Email address (validated)</td></tr>
+            <tr><td><code>password</code></td><td>Hidden characters</td></tr>
+            <tr><td><code>number</code></td><td>Numeric value</td></tr>
+            <tr><td><code>tel</code></td><td>Phone number</td></tr>
+            <tr><td><code>url</code></td><td>Web address</td></tr>
+            <tr><td><code>date</code></td><td>Date picker</td></tr>
+            <tr><td><code>time</code></td><td>Time picker</td></tr>
+            <tr><td><code>checkbox</code></td><td>Multiple-choice tick box</td></tr>
+            <tr><td><code>radio</code></td><td>One-of-many choice</td></tr>
+            <tr><td><code>file</code></td><td>File upload</td></tr>
+            <tr><td><code>range</code></td><td>Slider (min–max)</td></tr>
+            <tr><td><code>color</code></td><td>Color picker</td></tr>
+            <tr><td><code>hidden</code></td><td>Invisible data field</td></tr>
+            <tr><td><code>submit</code></td><td>Submit button</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">inputs.html</span></div>
+          <pre><span class="cm">&lt;!-- Radio buttons --&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type=</span><span class="val">"radio"</span>
+  <span class="attr">name=</span><span class="val">"gender"</span>
+  <span class="attr">value=</span><span class="val">"male"</span><span class="tag">&gt;</span> <span class="t">Male</span>
+<span class="tag">&lt;input</span> <span class="attr">type=</span><span class="val">"radio"</span>
+  <span class="attr">name=</span><span class="val">"gender"</span>
+  <span class="attr">value=</span><span class="val">"female"</span><span class="tag">&gt;</span> <span class="t">Female</span>
+
+<span class="cm">&lt;!-- Dropdown select --&gt;</span>
+<span class="tag">&lt;select</span> <span class="attr">name=</span><span class="val">"city"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;option</span> <span class="attr">value=</span><span class="val">"kgl"</span><span class="tag">&gt;</span><span class="t">Kigali</span><span class="tag">&lt;/option&gt;</span>
+  <span class="tag">&lt;option</span> <span class="attr">value=</span><span class="val">"nbi"</span><span class="tag">&gt;</span><span class="t">Nairobi</span><span class="tag">&lt;/option&gt;</span>
+<span class="tag">&lt;/select&gt;</span>
+
+<span class="cm">&lt;!-- Multiline text --&gt;</span>
+<span class="tag">&lt;textarea</span>
+  <span class="attr">name=</span><span class="val">"message"</span>
+  <span class="attr">rows=</span><span class="val">"4"</span>
+  <span class="attr">cols=</span><span class="val">"40"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/textarea&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 22: Form Attributes -->
+  <div class="slide slide-content" id="slide-22" data-slide-num="23 / 30">
+    <h2>Form <span class="hl2">Attributes</span> &amp; Validation</h2>
+    <div class="subtitle">Day 3 · Topic 03 — Controlling and validating form inputs</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Attribute</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td><code>required</code></td><td>Field must be filled before submit</td></tr>
+            <tr><td><code>placeholder</code></td><td>Hint text shown inside empty field</td></tr>
+            <tr><td><code>value</code></td><td>Default/pre-filled value</td></tr>
+            <tr><td><code>disabled</code></td><td>Field cannot be edited or submitted</td></tr>
+            <tr><td><code>readonly</code></td><td>Visible but not editable</td></tr>
+            <tr><td><code>min</code> / <code>max</code></td><td>Numeric / date range limits</td></tr>
+            <tr><td><code>maxlength</code></td><td>Max number of characters</td></tr>
+            <tr><td><code>pattern</code></td><td>Regex validation pattern</td></tr>
+            <tr><td><code>autofocus</code></td><td>Field gets focus on page load</td></tr>
+            <tr><td><code>autocomplete</code></td><td>Browser suggests previous entries</td></tr>
+            <tr><td><code>multiple</code></td><td>Select multiple options or files</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">validation.html</span></div>
+          <pre><span class="cm">&lt;!-- Age: 18–99, required --&gt;</span>
+<span class="tag">&lt;input</span>
+  <span class="attr">type=</span><span class="val">"number"</span>
+  <span class="attr">name=</span><span class="val">"age"</span>
+  <span class="attr">min=</span><span class="val">"18"</span>
+  <span class="attr">max=</span><span class="val">"99"</span>
+  <span class="attr">required</span><span class="tag">&gt;</span>
+
+<span class="cm">&lt;!-- Pattern: letters only --&gt;</span>
+<span class="tag">&lt;input</span>
+  <span class="attr">type=</span><span class="val">"text"</span>
+  <span class="attr">pattern=</span><span class="val">"[A-Za-z]+"</span>
+  <span class="attr">title=</span><span class="val">"Letters only"</span>
+  <span class="attr">required</span><span class="tag">&gt;</span>
+
+<span class="cm">&lt;!-- Max 150 characters --&gt;</span>
+<span class="tag">&lt;textarea</span>
+  <span class="attr">maxlength=</span><span class="val">"150"</span>
+  <span class="attr">placeholder=</span><span class="val">"Max 150 chars"</span>
+<span class="tag">&gt;&lt;/textarea&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 23: HTML5 Canvas -->
+  <div class="slide slide-content" id="slide-23" data-slide-num="24 / 30">
+    <h2>HTML5 <span class="hl3">Canvas</span></h2>
+    <div class="subtitle">Day 3 · Topic 04 — Drawing graphics with JavaScript</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">canvas.html</span></div>
+          <pre><span class="tag">&lt;canvas</span>
+  <span class="attr">id=</span><span class="val">"myCanvas"</span>
+  <span class="attr">width=</span><span class="val">"300"</span>
+  <span class="attr">height=</span><span class="val">"200"</span>
+  <span class="attr">style=</span><span class="val">"border:1px solid #ccc"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/canvas&gt;</span>
+
+<span class="tag">&lt;script&gt;</span>
+<span class="cm">// Get canvas context</span>
+<span class="t">const canvas =</span>
+  <span class="t">document.getElementById(</span>
+    <span class="str">'myCanvas'</span>
+  <span class="t">);</span>
+<span class="t">const ctx =</span>
+  <span class="t">canvas.getContext(</span><span class="str">'2d'</span><span class="t">);</span>
+
+<span class="cm">// Draw a filled rectangle</span>
+<span class="t">ctx.fillStyle = </span><span class="str">'#5ef0a0'</span><span class="t">;</span>
+<span class="t">ctx.fillRect(20, 20, 120, 80);</span>
+
+<span class="cm">// Draw a circle</span>
+<span class="t">ctx.beginPath();</span>
+<span class="t">ctx.arc(200,80,50,0,</span>
+  <span class="t">Math.PI*2);</span>
+<span class="t">ctx.fillStyle = </span><span class="str">'#5ea6f0'</span><span class="t">;</span>
+<span class="t">ctx.fill();</span>
+<span class="tag">&lt;/script&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px;">
+          <div class="icon">🎨</div>
+          <h4>What is Canvas?</h4>
+          <p>A blank drawing area in HTML controlled via JavaScript. Used for charts, games, animations, and image manipulation.</p>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Method</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td><code>fillRect(x,y,w,h)</code></td><td>Filled rectangle</td></tr>
+              <tr><td><code>strokeRect(x,y,w,h)</code></td><td>Outlined rectangle</td></tr>
+              <tr><td><code>arc(x,y,r,start,end)</code></td><td>Circle / arc</td></tr>
+              <tr><td><code>fillText(text,x,y)</code></td><td>Draw text</td></tr>
+              <tr><td><code>moveTo / lineTo</code></td><td>Draw lines</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 24: iFrames & Meta Tags -->
+  <div class="slide slide-content" id="slide-24" data-slide-num="25 / 30">
+    <h2>iFrames &amp; <span class="hl">Meta Tags</span></h2>
+    <div class="subtitle">Day 3 · Topic 05 — Embedding pages and page metadata</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="hbox hbox-blue" style="margin-bottom:10px;"><strong>&lt;iframe&gt;</strong> — Embed another HTML page</div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;iframe</span>
+  <span class="attr">src=</span><span class="val">"https://www.w3schools.com"</span>
+  <span class="attr">width=</span><span class="val">"400"</span>
+  <span class="attr">height=</span><span class="val">"300"</span>
+  <span class="attr">title=</span><span class="val">"W3Schools"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/iframe&gt;</span>
+
+<span class="cm">&lt;!-- YouTube embed --&gt;</span>
+<span class="tag">&lt;iframe</span>
+  <span class="attr">src=</span><span class="val">"https://www.youtube.com/
+embed/VIDEO_ID"</span>
+  <span class="attr">allowfullscreen</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/iframe&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="hbox hbox-green" style="margin-bottom:10px;"><strong>&lt;meta&gt; tags</strong> — page info for browsers &amp; SEO</div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- Character set --&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset=</span><span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+
+  <span class="cm">&lt;!-- Mobile responsive --&gt;</span>
+  <span class="tag">&lt;meta</span>
+    <span class="attr">name=</span><span class="val">"viewport"</span>
+    <span class="attr">content=</span><span class="val">"width=device-width,
+             initial-scale=1.0"</span><span class="tag">&gt;</span>
+
+  <span class="cm">&lt;!-- SEO description --&gt;</span>
+  <span class="tag">&lt;meta</span>
+    <span class="attr">name=</span><span class="val">"description"</span>
+    <span class="attr">content=</span><span class="val">"My HTML course page"</span><span class="tag">&gt;</span>
+
+  <span class="cm">&lt;!-- Author --&gt;</span>
+  <span class="tag">&lt;meta</span>
+    <span class="attr">name=</span><span class="val">"author"</span>
+    <span class="attr">content=</span><span class="val">"Your Name"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 25: HTML Entities -->
+  <div class="slide slide-content" id="slide-25" data-slide-num="26 / 30">
+    <h2>HTML <span class="hl2">Entities</span> &amp; Symbols</h2>
+    <div class="subtitle">Day 3 · Topic 06 — Special characters that need encoding</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Character</th><th>Entity Name</th><th>Entity Number</th></tr></thead>
+          <tbody>
+            <tr><td>&lt;</td><td><code>&amp;lt;</code></td><td><code>&amp;#60;</code></td></tr>
+            <tr><td>&gt;</td><td><code>&amp;gt;</code></td><td><code>&amp;#62;</code></td></tr>
+            <tr><td>&amp;</td><td><code>&amp;amp;</code></td><td><code>&amp;#38;</code></td></tr>
+            <tr><td>"</td><td><code>&amp;quot;</code></td><td><code>&amp;#34;</code></td></tr>
+            <tr><td>'</td><td><code>&amp;apos;</code></td><td><code>&amp;#39;</code></td></tr>
+            <tr><td>&nbsp;</td><td><code>&amp;nbsp;</code></td><td>Non-breaking space</td></tr>
+            <tr><td>©</td><td><code>&amp;copy;</code></td><td><code>&amp;#169;</code></td></tr>
+            <tr><td>®</td><td><code>&amp;reg;</code></td><td><code>&amp;#174;</code></td></tr>
+            <tr><td>€</td><td><code>&amp;euro;</code></td><td><code>&amp;#8364;</code></td></tr>
+            <tr><td>→</td><td><code>&amp;rarr;</code></td><td><code>&amp;#8594;</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <h4>Why use entities?</h4>
+          <p>Some characters are reserved in HTML. For example, <code>&lt;</code> starts a tag — to show it as text, write <code>&amp;lt;</code> instead. Entities start with <code>&amp;</code> and end with <code>;</code>.</p>
+        </div>
+        <div class="code-block">
+          <pre style="font-size: calc(0.88rem * var(--fs));"><span class="tag">&lt;p&gt;</span>
+  <span class="t">Use </span><span class="ent">&amp;lt;</span><span class="t">strong</span><span class="ent">&amp;gt;</span>
+  <span class="t"> for bold text.</span>
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;p&gt;</span>
+  <span class="t">Copyright </span><span class="ent">&amp;copy;</span>
+  <span class="t"> 2025</span>
+<span class="tag">&lt;/p&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 26: Accessibility Basics -->
+  <div class="slide slide-content" id="slide-26" data-slide-num="27 / 30">
+    <h2>Accessibility <span class="hl">Basics</span></h2>
+    <div class="subtitle">Day 3 · Topic 07 — Making web pages usable for everyone</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="steps">
+          <div class="step"><div class="step-num g">1</div><div class="step-body"><h5>Always use alt text on images</h5><p><code>&lt;img src="..." alt="Descriptive text"&gt;</code> — screen readers read this aloud.</p></div></div>
+          <div class="step"><div class="step-num b">2</div><div class="step-body"><h5>Use semantic HTML</h5><p><code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;button&gt;</code> are understood by assistive technology.</p></div></div>
+          <div class="step"><div class="step-num p">3</div><div class="step-body"><h5>Label all form inputs</h5><p><code>&lt;label for="id"&gt;</code> linked to each <code>&lt;input id="id"&gt;</code> is essential.</p></div></div>
+          <div class="step"><div class="step-num y">4</div><div class="step-body"><h5>Meaningful link text</h5><p>Write "Read the report" not "Click here". Screen reader users navigate by links.</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">a11y.html</span></div>
+          <pre><span class="cm">&lt;!-- Good: descriptive alt --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src=</span><span class="val">"chart.png"</span>
+     <span class="attr">alt=</span><span class="val">"Bar chart showing
+     2024 sales by quarter"</span><span class="tag">&gt;</span>
+
+<span class="cm">&lt;!-- Good: linked label --&gt;</span>
+<span class="tag">&lt;label</span> <span class="attr">for=</span><span class="val">"email"</span><span class="tag">&gt;</span>
+  <span class="t">Email Address</span>
+<span class="tag">&lt;/label&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type=</span><span class="val">"email"</span>
+       <span class="attr">id=</span><span class="val">"email"</span><span class="tag">&gt;</span>
+
+<span class="cm">&lt;!-- Good: lang attribute --&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="val">"en"</span><span class="tag">&gt;</span></pre>
+        </div>
+        <div class="hbox hbox-pink" style="margin-top:12px;">
+          <strong>WAI-ARIA:</strong> Use <code>aria-label</code>, <code>aria-hidden</code>, and <code>role</code> attributes to improve accessibility beyond standard HTML.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 27: Final Project -->
+  <div class="slide slide-content" id="slide-27" data-slide-num="28 / 30">
+    <h2>🏁 Final <span class="hl">Project</span></h2>
+    <div class="subtitle">Day 3 · Topic 08 — Build a complete personal website</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h4>📋 Project Brief</h4>
+          <p style="margin-bottom:10px;">Build a <strong>personal portfolio / profile website</strong> with at least 2 pages.</p>
+          <ul style="padding-left:16px;line-height:2.1;">
+            <li>Correct HTML5 doctype &amp; structure</li>
+            <li>Semantic elements: header, nav, main, footer</li>
+            <li>Navigation linking between pages</li>
+            <li>At least one image with proper alt text</li>
+            <li>An ordered or unordered list of skills</li>
+            <li>A table (e.g. education or work history)</li>
+            <li>A contact form with name, email, message</li>
+            <li>Form validation (required fields)</li>
+            <li>HTML entities used correctly (©, &amp;, etc.)</li>
+            <li>At least 3 meta tags in &lt;head&gt;</li>
+            <li>At least one use of class and id</li>
+            <li>Comments explaining key sections</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <h4>📁 File Structure</h4>
+          <pre style="font-family:var(--font-mono);font-size: calc(0.88rem * var(--fs));color:var(--text);line-height:1.8;margin-top:8px;">my-portfolio/
+├── index.html       ← Home page
+├── about.html       ← About page
+├── contact.html     ← Contact form
+└── images/
+    └── photo.jpg</pre>
+        </div>
+        <div class="hbox hbox-yellow">
+          <strong>Bonus:</strong> Add a <code>&lt;canvas&gt;</code> drawing, embed a YouTube video or Google Map iframe, or add an audio clip.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 28: Quick Reference -->
+  <div class="slide slide-content" id="slide-28" data-slide-num="29 / 30">
+    <h2>HTML <span class="hl">Quick Reference</span></h2>
+    <div class="subtitle">The most important tags — all in one place</div>
+    <div class="divider"></div>
+    <div class="three-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th colspan="2">Structure</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>HTML5 declaration</td></tr>
+            <tr><td><code>&lt;html&gt;</code></td><td>Root element</td></tr>
+            <tr><td><code>&lt;head&gt;</code></td><td>Meta info</td></tr>
+            <tr><td><code>&lt;body&gt;</code></td><td>Page content</td></tr>
+            <tr><td><code>&lt;header&gt;</code></td><td>Page header</td></tr>
+            <tr><td><code>&lt;nav&gt;</code></td><td>Navigation</td></tr>
+            <tr><td><code>&lt;main&gt;</code></td><td>Main content</td></tr>
+            <tr><td><code>&lt;section&gt;</code></td><td>Content section</td></tr>
+            <tr><td><code>&lt;article&gt;</code></td><td>Self-contained</td></tr>
+            <tr><td><code>&lt;aside&gt;</code></td><td>Sidebar</td></tr>
+            <tr><td><code>&lt;footer&gt;</code></td><td>Page footer</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th colspan="2">Text &amp; Media</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;h1&gt;–&lt;h6&gt;</code></td><td>Headings</td></tr>
+            <tr><td><code>&lt;p&gt;</code></td><td>Paragraph</td></tr>
+            <tr><td><code>&lt;strong&gt;</code></td><td>Important (bold)</td></tr>
+            <tr><td><code>&lt;em&gt;</code></td><td>Emphasis (italic)</td></tr>
+            <tr><td><code>&lt;br&gt;</code></td><td>Line break</td></tr>
+            <tr><td><code>&lt;hr&gt;</code></td><td>Horizontal rule</td></tr>
+            <tr><td><code>&lt;a&gt;</code></td><td>Link</td></tr>
+            <tr><td><code>&lt;img&gt;</code></td><td>Image</td></tr>
+            <tr><td><code>&lt;audio&gt;</code></td><td>Audio</td></tr>
+            <tr><td><code>&lt;video&gt;</code></td><td>Video</td></tr>
+            <tr><td><code>&lt;canvas&gt;</code></td><td>Drawing area</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th colspan="2">Forms &amp; Lists</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;form&gt;</code></td><td>Form container</td></tr>
+            <tr><td><code>&lt;input&gt;</code></td><td>Input field</td></tr>
+            <tr><td><code>&lt;label&gt;</code></td><td>Input label</td></tr>
+            <tr><td><code>&lt;textarea&gt;</code></td><td>Multi-line text</td></tr>
+            <tr><td><code>&lt;select&gt;</code></td><td>Dropdown</td></tr>
+            <tr><td><code>&lt;option&gt;</code></td><td>Dropdown option</td></tr>
+            <tr><td><code>&lt;button&gt;</code></td><td>Button</td></tr>
+            <tr><td><code>&lt;ul&gt;</code></td><td>Unordered list</td></tr>
+            <tr><td><code>&lt;ol&gt;</code></td><td>Ordered list</td></tr>
+            <tr><td><code>&lt;li&gt;</code></td><td>List item</td></tr>
+            <tr><td><code>&lt;table&gt;</code></td><td>Table</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 29: What's Next -->
+  <div class="slide slide-cover" id="slide-29" style="background:radial-gradient(ellipse at 70% 40%, #1a1530 0%, var(--bg) 60%);" data-slide-num="30 / 40">
+    <div class="eyebrow">&#9670; Course Complete</div>
+    <h1>What's <span>Next?</span></h1>
+    <p>You've completed the 3-day HTML foundation. Here's your learning roadmap.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+      <div class="card" style="max-width:200px;border-color:var(--accent2);">
+        <div class="icon">🎨</div>
+        <h4 style="color:var(--accent2);">CSS</h4>
+        <p>Style your HTML with colors, layouts, fonts, and animations.</p>
+      </div>
+      <div class="card" style="max-width:200px;border-color:var(--accent3);">
+        <div class="icon">⚡</div>
+        <h4 style="color:var(--accent3);">JavaScript</h4>
+        <p>Add interactivity — respond to clicks, validate forms, fetch data.</p>
+      </div>
+      <div class="card" style="max-width:200px;border-color:var(--accent4);">
+        <div class="icon">📱</div>
+        <h4 style="color:var(--accent4);">Responsive Design</h4>
+        <p>Make pages look great on mobile, tablet and desktop.</p>
+      </div>
+      <div class="card" style="max-width:200px;border-color:var(--accent);">
+        <div class="icon">🚀</div>
+        <h4 style="color:var(--accent);">Deployment</h4>
+        <p>Put your site online free with GitHub Pages or Netlify.</p>
+      </div>
+    </div>
+    <div class="hbox hbox-green">
+      <strong>Keep practicing at</strong> <a href="https://www.w3schools.com/html/" style="color:var(--accent2);">w3schools.com/html</a> — try every "Try it Yourself" example!
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════
+       CSS SECTION (Slides 30–39)
+       ══════════════════════ -->
+
+  <!-- SLIDE 30: CSS Day Cover -->
+  <div class="slide day-cover" id="slide-30" style="background:radial-gradient(ellipse at 60% 50%, #1e1535 0%, var(--bg) 70%);" data-slide-num="31 / 40">
+    <div class="day-badge" style="color:#a78bfa;border-color:#a78bfa;background:rgba(167,139,250,0.08);">&#9670; CSS &nbsp;·&nbsp; Bonus Module</div>
+    <h2 style="color:var(--text);">Styling with <span style="color:#a78bfa;">CSS</span></h2>
+    <p>Learn the three ways to add CSS to HTML, how selectors work, the box model, and how to style text, colors, and layouts — all tied back to your HTML pages.</p>
+    <div class="agenda-grid">
+      <div class="agenda-item"><div class="num">01</div><div class="topic">What is CSS?</div></div>
+      <div class="agenda-item"><div class="num">02</div><div class="topic">Inline CSS</div></div>
+      <div class="agenda-item"><div class="num">03</div><div class="topic">Internal CSS</div></div>
+      <div class="agenda-item"><div class="num">04</div><div class="topic">External CSS + Linking</div></div>
+      <div class="agenda-item"><div class="num">05</div><div class="topic">Selectors</div></div>
+      <div class="agenda-item"><div class="num">06</div><div class="topic">Colors &amp; Text</div></div>
+      <div class="agenda-item"><div class="num">07</div><div class="topic">Box Model</div></div>
+      <div class="agenda-item"><div class="num">08</div><div class="topic">Specificity &amp; Cascade</div></div>
+      <div class="agenda-item"><div class="num">09</div><div class="topic">Common Properties</div></div>
+      <div class="agenda-item"><div class="num">10</div><div class="topic">Practice Project</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 31: What is CSS? -->
+  <div class="slide slide-content" id="slide-31" data-slide-num="32 / 40">
+    <h2>What is <span style="color:#a78bfa;">CSS</span>?</h2>
+    <div class="subtitle">CSS Module · Topic 01 — Cascading Style Sheets</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="steps">
+          <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:#a78bfa;">C</div><div class="step-body"><h5>Cascading</h5><p>Styles flow down from parent to child elements, and rules can override each other in a defined order.</p></div></div>
+          <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:#a78bfa;">S</div><div class="step-body"><h5>Style</h5><p>Controls the visual appearance — colors, fonts, spacing, layout, animations.</p></div></div>
+          <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:#a78bfa;">S</div><div class="step-body"><h5>Sheets</h5><p>Written in separate <code>.css</code> files (or inside HTML) as a list of rules.</p></div></div>
+        </div>
+        <div class="hbox hbox-green" style="margin-top:14px;">
+          <strong>HTML = Structure &nbsp;|&nbsp; CSS = Appearance</strong><br>
+          HTML says "this is a heading". CSS says "make it purple, 32px, bold".
+        </div>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">A CSS rule</span></div>
+          <pre><span class="cm">/* selector { property: value; } */</span>
+
+<span class="tag">h1</span> <span class="t">{</span>
+  <span class="attr">color</span><span class="t">:</span> <span class="val">purple</span><span class="t">;</span>
+  <span class="attr">font-size</span><span class="t">:</span> <span class="val">2rem</span><span class="t">;</span>
+  <span class="attr">font-weight</span><span class="t">:</span> <span class="val">bold</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="tag">p</span> <span class="t">{</span>
+  <span class="attr">color</span><span class="t">:</span> <span class="val">#333</span><span class="t">;</span>
+  <span class="attr">line-height</span><span class="t">:</span> <span class="val">1.6</span><span class="t">;</span>
+<span class="t">}</span></pre>
+        </div>
+        <div class="hbox hbox-blue" style="margin-top:12px;">
+          A CSS rule has three parts: a <strong>selector</strong> (what to style), a <strong>property</strong> (what aspect), and a <strong>value</strong> (how to style it).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 32: Inline CSS -->
+  <div class="slide slide-content" id="slide-32" data-slide-num="33 / 40">
+    <h2><span style="color:#a78bfa;">Inline</span> CSS</h2>
+    <div class="subtitle">CSS Module · Topic 02 — Styles applied directly on an element</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">inline.html</span></div>
+          <pre><span class="cm">&lt;!-- Style goes in the style="" attribute --&gt;</span>
+
+<span class="tag">&lt;h1</span> <span class="attr">style=</span><span class="val">"color: purple; font-size: 2rem;"</span><span class="tag">&gt;</span>
+  <span class="t">Hello World</span>
+<span class="tag">&lt;/h1&gt;</span>
+
+<span class="tag">&lt;p</span> <span class="attr">style=</span><span class="val">"color: #555; line-height: 1.8;"</span><span class="tag">&gt;</span>
+  <span class="t">This paragraph has custom spacing.</span>
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;div</span> <span class="attr">style=</span><span class="val">"background: yellow;
+            padding: 10px;
+            border: 2px solid red;"</span><span class="tag">&gt;</span>
+  <span class="t">A styled box</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="icon">✅</div>
+          <h4>When to use inline CSS</h4>
+          <p>Quick one-off styles, email HTML templates, dynamically set styles via JavaScript, or overriding styles in a pinch.</p>
+        </div>
+        <div class="hbox hbox-pink">
+          <strong>⚠️ Avoid overusing inline CSS.</strong> It mixes structure and style, is hard to maintain, cannot be reused, and has the highest specificity — overriding all other styles.
+        </div>
+        <div class="hbox hbox-yellow" style="margin-top:10px;">
+          <strong>Syntax:</strong> Multiple declarations are separated by semicolons inside the <code>style=""</code> attribute: <code>style="prop1: val1; prop2: val2;"</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 33: Internal CSS -->
+  <div class="slide slide-content" id="slide-33" data-slide-num="34 / 40">
+    <h2><span style="color:#a78bfa;">Internal</span> CSS</h2>
+    <div class="subtitle">CSS Module · Topic 03 — Styles in the &lt;head&gt; using a &lt;style&gt; tag</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="code-block">
+        <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">internal.html</span></div>
+        <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;title&gt;</span><span class="t">My Page</span><span class="tag">&lt;/title&gt;</span>
+
+  <span class="cm">&lt;!-- Internal CSS lives here --&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="tag">body</span> <span class="t">{</span>
+      <span class="attr">font-family</span><span class="t">:</span> <span class="val">Arial, sans-serif</span><span class="t">;</span>
+      <span class="attr">background</span><span class="t">:</span> <span class="val">#f0f0f0</span><span class="t">;</span>
+    <span class="t">}</span>
+
+    <span class="tag">h1</span> <span class="t">{</span>
+      <span class="attr">color</span><span class="t">:</span> <span class="val">#333</span><span class="t">;</span>
+      <span class="attr">text-align</span><span class="t">:</span> <span class="val">center</span><span class="t">;</span>
+    <span class="t">}</span>
+
+    <span class="tag">p</span> <span class="t">{</span>
+      <span class="attr">color</span><span class="t">:</span> <span class="val">#666</span><span class="t">;</span>
+      <span class="attr">font-size</span><span class="t">:</span> <span class="val">1.1rem</span><span class="t">;</span>
+    <span class="t">}</span>
+  <span class="tag">&lt;/style&gt;</span>
+
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1&gt;</span><span class="t">Hello!</span><span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="t">Styled by internal CSS.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="icon">📄</div>
+          <h4>How internal CSS works</h4>
+          <p>CSS rules are written inside a <code>&lt;style&gt;</code> tag placed in the <code>&lt;head&gt;</code> section. They apply to the entire current page only.</p>
+        </div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="icon">✅</div>
+          <h4>Good for:</h4>
+          <p>Single-page demos, quick prototypes, or pages that need unique styles not shared elsewhere.</p>
+        </div>
+        <div class="hbox hbox-pink">
+          <strong>Limitation:</strong> Styles only affect <em>this one page</em>. If you have 10 pages, you'd need to copy the <code>&lt;style&gt;</code> block into each one — that's hard to maintain.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 34: External CSS + Linking -->
+  <div class="slide slide-content" id="slide-34" data-slide-num="35 / 40">
+    <h2><span style="color:#a78bfa;">External</span> CSS &amp; Linking</h2>
+    <div class="subtitle">CSS Module · Topic 04 — The professional, recommended approach</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="hbox" style="background:rgba(167,139,250,0.1);border-left:3px solid #a78bfa;margin-bottom:14px;font-size:calc(0.88rem * var(--fs));">
+          <strong>Step 1:</strong> Create a separate <code>style.css</code> file
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">style.css</span></div>
+          <pre><span class="tag">body</span> <span class="t">{</span>
+  <span class="attr">font-family</span><span class="t">:</span> <span class="val">Arial, sans-serif</span><span class="t">;</span>
+  <span class="attr">margin</span><span class="t">:</span> <span class="val">0</span><span class="t">;</span>
+  <span class="attr">background</span><span class="t">:</span> <span class="val">#f5f5f5</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="tag">h1</span> <span class="t">{</span>
+  <span class="attr">color</span><span class="t">:</span> <span class="val">#2c3e50</span><span class="t">;</span>
+  <span class="attr">font-size</span><span class="t">:</span> <span class="val">2rem</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="tag">.highlight</span> <span class="t">{</span>
+  <span class="attr">background</span><span class="t">:</span> <span class="val">yellow</span><span class="t">;</span>
+  <span class="attr">padding</span><span class="t">:</span> <span class="val">4px 8px</span><span class="t">;</span>
+<span class="t">}</span></pre>
+        </div>
+      </div>
+      <div>
+        <div class="hbox" style="background:rgba(167,139,250,0.1);border-left:3px solid #a78bfa;margin-bottom:14px;font-size:calc(0.88rem * var(--fs));">
+          <strong>Step 2:</strong> Link it in your HTML <code>&lt;head&gt;</code>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">index.html</span></div>
+          <pre><span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;title&gt;</span><span class="t">My Site</span><span class="tag">&lt;/title&gt;</span>
+
+  <span class="cm">&lt;!-- Link external CSS file --&gt;</span>
+  <span class="tag">&lt;link</span>
+    <span class="attr">rel=</span><span class="val">"stylesheet"</span>
+    <span class="attr">href=</span><span class="val">"style.css"</span>
+  <span class="tag">&gt;</span>
+
+  <span class="cm">&lt;!-- Link from subfolder --&gt;</span>
+  <span class="tag">&lt;link</span>
+    <span class="attr">rel=</span><span class="val">"stylesheet"</span>
+    <span class="attr">href=</span><span class="val">"css/style.css"</span>
+  <span class="tag">&gt;</span>
+
+  <span class="cm">&lt;!-- Link from CDN (e.g. Google Fonts) --&gt;</span>
+  <span class="tag">&lt;link</span>
+    <span class="attr">rel=</span><span class="val">"stylesheet"</span>
+    <span class="attr">href=</span><span class="val">"https://fonts.googleapis.com/
+css2?family=Roboto"</span>
+  <span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span></pre>
+        </div>
+        <div class="hbox hbox-green" style="margin-top:10px;">
+          <strong>One CSS file → many HTML pages.</strong> Change the style in one place and all pages update instantly. This is the professional standard.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 35: Comparing All Three Methods -->
+  <div class="slide slide-content" id="slide-35" data-slide-num="36 / 40">
+    <h2>Comparing the <span style="color:#a78bfa;">3 Methods</span></h2>
+    <div class="subtitle">CSS Module · Inline vs Internal vs External — when to use each</div>
+    <div class="divider"></div>
+    <div class="tbl-wrap" style="margin-bottom:18px;">
+      <table>
+        <thead><tr><th>Method</th><th>Where written</th><th>Scope</th><th>Best for</th><th>Recommended?</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Inline</strong></td>
+            <td><code>style=""</code> attribute on element</td>
+            <td>Single element only</td>
+            <td>One-off overrides, JS-generated styles</td>
+            <td>⚠️ Use sparingly</td>
+          </tr>
+          <tr>
+            <td><strong>Internal</strong></td>
+            <td><code>&lt;style&gt;</code> tag in <code>&lt;head&gt;</code></td>
+            <td>Current page only</td>
+            <td>Single-page demos, prototypes</td>
+            <td>🟡 OK for learning</td>
+          </tr>
+          <tr>
+            <td><strong>External</strong></td>
+            <td>Separate <code>.css</code> file, linked via <code>&lt;link&gt;</code></td>
+            <td>All linked pages</td>
+            <td>Real websites, all professional projects</td>
+            <td>✅ Always preferred</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="three-col">
+      <div class="hbox hbox-pink" style="margin-top:0;">
+        <strong>Inline priority:</strong> Overrides everything. Hard to maintain. Avoid for layout.
+      </div>
+      <div class="hbox hbox-yellow" style="margin-top:0;">
+        <strong>Internal priority:</strong> Overrides external CSS. Good for page-specific tweaks.
+      </div>
+      <div class="hbox hbox-green" style="margin-top:0;">
+        <strong>External priority:</strong> Lowest but cleanest. Browser can cache it — pages load faster!
+      </div>
+    </div>
+    <div class="hbox hbox-blue" style="margin-top:14px;">
+      <strong>File structure tip:</strong> Keep your CSS in a <code>css/</code> folder: <code>my-project/css/style.css</code> and link with <code>href="css/style.css"</code>
+    </div>
+  </div>
+
+  <!-- SLIDE 36: CSS Selectors -->
+  <div class="slide slide-content" id="slide-36" data-slide-num="37 / 40">
+    <h2>CSS <span style="color:#a78bfa;">Selectors</span></h2>
+    <div class="subtitle">CSS Module · Topic 05 — Targeting exactly which elements to style</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Selector</th><th>Syntax</th><th>What it targets</th></tr></thead>
+          <tbody>
+            <tr><td>Element</td><td><code>p</code></td><td>All <code>&lt;p&gt;</code> elements</td></tr>
+            <tr><td>Class</td><td><code>.highlight</code></td><td>All elements with <code>class="highlight"</code></td></tr>
+            <tr><td>ID</td><td><code>#header</code></td><td>Element with <code>id="header"</code></td></tr>
+            <tr><td>Universal</td><td><code>*</code></td><td>Every element on the page</td></tr>
+            <tr><td>Descendant</td><td><code>div p</code></td><td><code>&lt;p&gt;</code> inside any <code>&lt;div&gt;</code></td></tr>
+            <tr><td>Child</td><td><code>ul &gt; li</code></td><td>Direct <code>&lt;li&gt;</code> children of <code>&lt;ul&gt;</code></td></tr>
+            <tr><td>Group</td><td><code>h1, h2, h3</code></td><td>All three heading types at once</td></tr>
+            <tr><td>Pseudo-class</td><td><code>a:hover</code></td><td>Link when mouse is over it</td></tr>
+            <tr><td>Pseudo-class</td><td><code>li:first-child</code></td><td>First <code>&lt;li&gt;</code> in a list</td></tr>
+            <tr><td>Attribute</td><td><code>input[type="text"]</code></td><td>Text inputs only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">selectors.css</span></div>
+          <pre><span class="cm">/* Element selector */</span>
+<span class="tag">p</span> <span class="t">{</span> <span class="attr">color</span><span class="t">:</span> <span class="val">#333</span><span class="t">; }</span>
+
+<span class="cm">/* Class selector */</span>
+<span class="tag">.card</span> <span class="t">{</span> <span class="attr">background</span><span class="t">:</span> <span class="val">white</span><span class="t">; }</span>
+
+<span class="cm">/* ID selector */</span>
+<span class="tag">#navbar</span> <span class="t">{</span> <span class="attr">position</span><span class="t">:</span> <span class="val">sticky</span><span class="t">; }</span>
+
+<span class="cm">/* Descendant */</span>
+<span class="tag">nav a</span> <span class="t">{</span> <span class="attr">text-decoration</span><span class="t">:</span> <span class="val">none</span><span class="t">; }</span>
+
+<span class="cm">/* Hover pseudo-class */</span>
+<span class="tag">button:hover</span> <span class="t">{</span>
+  <span class="attr">background</span><span class="t">:</span> <span class="val">#007bff</span><span class="t">;</span>
+  <span class="attr">color</span><span class="t">:</span> <span class="val">white</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="cm">/* Group selector */</span>
+<span class="tag">h1, h2, h3</span> <span class="t">{</span>
+  <span class="attr">font-family</span><span class="t">:</span> <span class="val">Georgia, serif</span><span class="t">;</span>
+<span class="t">}</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 37: Box Model -->
+  <div class="slide slide-content" id="slide-37" data-slide-num="38 / 40">
+    <h2>The CSS <span style="color:#a78bfa;">Box Model</span></h2>
+    <div class="subtitle">CSS Module · Topic 07 — Every element is a rectangular box</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <!-- Visual box model diagram -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
+          <div style="background:rgba(240,200,94,0.15);border:2px dashed var(--accent4);border-radius:8px;padding:14px;font-size:calc(0.72rem * var(--fs));color:var(--accent4);font-family:var(--font-mono);">
+            MARGIN
+            <div style="background:rgba(94,166,240,0.15);border:2px dashed var(--accent2);border-radius:6px;padding:12px;margin-top:10px;color:var(--accent2);">
+              BORDER
+              <div style="background:rgba(94,240,160,0.12);border:2px dashed var(--accent);border-radius:4px;padding:10px;margin-top:8px;color:var(--accent);">
+                PADDING
+                <div style="background:rgba(167,139,250,0.2);border:2px solid #a78bfa;border-radius:4px;padding:14px;margin-top:8px;color:#a78bfa;font-size:calc(0.9rem * var(--fs));font-weight:700;">
+                  CONTENT
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="code-block" style="margin-bottom:14px;">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">box-model.css</span></div>
+          <pre><span class="tag">.box</span> <span class="t">{</span>
+  <span class="cm">/* Content size */</span>
+  <span class="attr">width</span><span class="t">:</span>  <span class="val">200px</span><span class="t">;</span>
+  <span class="attr">height</span><span class="t">:</span> <span class="val">100px</span><span class="t">;</span>
+
+  <span class="cm">/* Space inside border */</span>
+  <span class="attr">padding</span><span class="t">:</span> <span class="val">20px</span><span class="t">;</span>
+
+  <span class="cm">/* Visible edge */</span>
+  <span class="attr">border</span><span class="t">:</span> <span class="val">2px solid black</span><span class="t">;</span>
+
+  <span class="cm">/* Space outside border */</span>
+  <span class="attr">margin</span><span class="t">:</span> <span class="val">30px</span><span class="t">;</span>
+
+  <span class="cm">/* Include padding in width */</span>
+  <span class="attr">box-sizing</span><span class="t">:</span> <span class="val">border-box</span><span class="t">;</span>
+<span class="t">}</span></pre>
+        </div>
+        <div class="hbox hbox-green">
+          <strong>box-sizing: border-box</strong> — always add this! It makes width include padding + border, so layout math is much simpler.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 38: Specificity & Cascade -->
+  <div class="slide slide-content" id="slide-38" data-slide-num="39 / 40">
+    <h2>Specificity &amp; <span style="color:#a78bfa;">The Cascade</span></h2>
+    <div class="subtitle">CSS Module · Topic 08 — Why does one style win over another?</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <h4>🏆 Specificity Score (highest wins)</h4>
+          <div class="tbl-wrap" style="margin-top:10px;">
+            <table>
+              <thead><tr><th>Selector type</th><th>Score</th></tr></thead>
+              <tbody>
+                <tr><td>Inline style <code>style=""</code></td><td><strong style="color:var(--accent3);">1,0,0,0</strong></td></tr>
+                <tr><td>ID selector <code>#id</code></td><td><strong style="color:var(--accent4);">0,1,0,0</strong></td></tr>
+                <tr><td>Class / attribute / pseudo-class</td><td><strong style="color:var(--accent2);">0,0,1,0</strong></td></tr>
+                <tr><td>Element selector <code>p</code></td><td><strong style="color:var(--accent);">0,0,0,1</strong></td></tr>
+                <tr><td>Universal <code>*</code></td><td>0,0,0,0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="hbox hbox-pink">
+          <strong>!important</strong> overrides ALL specificity — use it only as a last resort. It breaks the cascade and causes maintenance nightmares.
+        </div>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">cascade.css</span></div>
+          <pre><span class="cm">/* Score: 0,0,0,1 — element */</span>
+<span class="tag">p</span> <span class="t">{</span> <span class="attr">color</span><span class="t">:</span> <span class="val">black</span><span class="t">; }</span>
+
+<span class="cm">/* Score: 0,0,1,0 — class (wins) */</span>
+<span class="tag">.intro</span> <span class="t">{</span> <span class="attr">color</span><span class="t">:</span> <span class="val">blue</span><span class="t">; }</span>
+
+<span class="cm">/* Score: 0,1,0,0 — ID (wins) */</span>
+<span class="tag">#hero</span> <span class="t">{</span> <span class="attr">color</span><span class="t">:</span> <span class="val">red</span><span class="t">; }</span>
+
+<span class="cm">/* Score: 1,0,0,0 — inline (wins) */</span>
+<span class="cm">&lt;p style="color: green;"&gt;</span>
+
+<span class="cm">/* Same score → last rule wins */</span>
+<span class="tag">p</span> <span class="t">{</span> <span class="attr">color</span><span class="t">:</span> <span class="val">orange</span><span class="t">; }</span>
+<span class="tag">p</span> <span class="t">{</span> <span class="attr">color</span><span class="t">:</span> <span class="val">teal</span><span class="t">; }</span>
+<span class="cm">/* ↑ teal wins — written last */</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 39: CSS Practice -->
+  <div class="slide slide-content" id="slide-39" data-slide-num="40 / 40">
+    <h2>CSS <span style="color:#a78bfa;">Practice Project</span></h2>
+    <div class="subtitle">CSS Module · Style your Day 2 Hobby Page using all three CSS methods</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h4>🏋️ Exercise: Style Your Hobby Page</h4>
+          <p>Take your Day 2 hobby page and add CSS using all three methods:</p>
+          <ul style="margin-top:10px;padding-left:16px;line-height:2.1;">
+            <li><strong>Inline:</strong> Add <code>style=""</code> to one heading to change its colour</li>
+            <li><strong>Internal:</strong> Add a <code>&lt;style&gt;</code> block to style <code>body</code> background and font</li>
+            <li><strong>External:</strong> Create <code>style.css</code>, link it, and move all styles there</li>
+            <li>Style the <code>&lt;nav&gt;</code> links — remove underline, add colour</li>
+            <li>Add <code>padding</code> and <code>margin</code> to sections</li>
+            <li>Add a <code>border</code> to your table</li>
+            <li>Use a class to style all <code>&lt;li&gt;</code> items</li>
+            <li>Add a <code>:hover</code> effect to links or buttons</li>
+            <li>Set <code>box-sizing: border-box</code> on <code>*</code></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="code-filename">style.css (starter)</span></div>
+          <pre><span class="cm">/* Reset & base */</span>
+<span class="tag">*</span> <span class="t">{</span>
+  <span class="attr">box-sizing</span><span class="t">:</span> <span class="val">border-box</span><span class="t">;</span>
+  <span class="attr">margin</span><span class="t">:</span> <span class="val">0</span><span class="t">;</span>
+  <span class="attr">padding</span><span class="t">:</span> <span class="val">0</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="tag">body</span> <span class="t">{</span>
+  <span class="attr">font-family</span><span class="t">:</span> <span class="val">Arial, sans-serif</span><span class="t">;</span>
+  <span class="attr">background</span><span class="t">:</span> <span class="val">#f5f5f5</span><span class="t">;</span>
+  <span class="attr">color</span><span class="t">:</span> <span class="val">#333</span><span class="t">;</span>
+  <span class="attr">line-height</span><span class="t">:</span> <span class="val">1.6</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="tag">header</span> <span class="t">{</span>
+  <span class="attr">background</span><span class="t">:</span> <span class="val">#2c3e50</span><span class="t">;</span>
+  <span class="attr">color</span><span class="t">:</span> <span class="val">white</span><span class="t">;</span>
+  <span class="attr">padding</span><span class="t">:</span> <span class="val">20px 40px</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="tag">nav a</span> <span class="t">{</span>
+  <span class="attr">color</span><span class="t">:</span> <span class="val">#5dade2</span><span class="t">;</span>
+  <span class="attr">text-decoration</span><span class="t">:</span> <span class="val">none</span><span class="t">;</span>
+  <span class="attr">margin-right</span><span class="t">:</span> <span class="val">16px</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="tag">nav a:hover</span> <span class="t">{</span>
+  <span class="attr">text-decoration</span><span class="t">:</span> <span class="val">underline</span><span class="t">;</span>
+<span class="t">}</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end slide-area -->
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="slide-dots" id="dotContainer"></div>
+  <div class="hint">← → or click dots to navigate</div>
+</div>
+
+<script>
+  const TOTAL = 40;
+  const DAY_STARTS = { 1: 0, 2: 10, 3: 19, 4: 30 };
+
+  let current = 0;
+
+  function renderDots() {
+    const c = document.getElementById('dotContainer');
+    c.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot-ind' + (i === current ? ' active' : '');
+      d.onclick = () => goTo(i);
+      c.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    document.getElementById('slide-' + current).classList.remove('active');
+    current = Math.max(0, Math.min(TOTAL - 1, n));
+    document.getElementById('slide-' + current).classList.add('active');
+    document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + TOTAL;
+    document.getElementById('progressBar').style.width = ((current + 1) / TOTAL * 100) + '%';
+    document.getElementById('prevBtn').disabled = current === 0;
+    document.getElementById('nextBtn').disabled = current === TOTAL - 1;
+    // Update day tabs
+    let day = 1;
+    if (current >= DAY_STARTS[4]) day = 4;
+    else if (current >= DAY_STARTS[3]) day = 3;
+    else if (current >= DAY_STARTS[2]) day = 2;
+    document.querySelectorAll('.day-tab').forEach((t, i) => t.classList.toggle('active', i + 1 === day));
+    renderDots();
+  }
+
+  function navigate(dir) { goTo(current + dir); }
+
+  function goToDay(d) { goTo(DAY_STARTS[d]); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+  });
+
+  // Init
+  goTo(0);
+
+  /* ── THEME TOGGLE ── */
+  let isDark = true;
+  function toggleTheme() {
+    isDark = !isDark;
+    document.documentElement.classList.toggle('light', !isDark);
+    document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
+  }
+
+  /* ── FONT SIZE ── */
+  const fontSteps = [0.8, 0.9, 1, 1.1, 1.2, 1.35, 1.5];
+  let fontIdx = 2; // default = 1 (100%)
+  function changeFont(dir) {
+    fontIdx = Math.max(0, Math.min(fontSteps.length - 1, fontIdx + dir));
+    const scale = fontSteps[fontIdx];
+    document.documentElement.style.setProperty('--fs', scale);
+    document.getElementById('fontLabel').textContent = Math.round(scale * 100) + '%';
+  }
+</script>
+</body>
+</html>
